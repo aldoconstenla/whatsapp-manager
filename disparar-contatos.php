@@ -70,6 +70,8 @@ if (file_exists($jsonPath)) {
         <button type="button" class="format-btn" onclick="inserirNoCursor('{Nome}')">{Nome}</button>
         <button type="button" class="format-btn" onclick="formatarTexto('negrito')"><strong>B</strong></button>
         <button type="button" class="format-btn" onclick="formatarTexto('italico')"><em>I</em></button>
+        <button type="button" class="format-btn" onclick="salvarMensagemAtual()">💾</button>
+        <button type="button" class="format-btn" onclick="abrirLightboxMensagens()">📂</button>
       </div>
       <label for="mensagem">Mensagem a ser enviada:</label>
 
@@ -119,6 +121,16 @@ if (file_exists($jsonPath)) {
       <select id="selectListaSalva" onchange="carregarListaSelecionada()">
         <option value="">📂 Carregar lista salva...</option>
       </select>
+    </div>
+  </div>
+
+  <div id="lightbox-mensagens" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 9999; overflow-y: auto;">
+    <div style="max-width: 600px; margin: 60px auto; background: #1e1e1e; padding: 20px; border-radius: 12px; border: 2px solid #00ff88;">
+      <h2 style="color: #00ff88;">📂 Mensagens Salvas</h2>
+      <div id="listaMensagensSalvas"></div>
+      <div style="text-align: right; margin-top: 20px;">
+        <button onclick="fecharLightboxMensagens()" style="background: #444; color: #fff; padding: 10px 20px; border: 1px solid #00ff88; border-radius: 8px; cursor: pointer;">Fechar</button>
+      </div>
     </div>
   </div>
 

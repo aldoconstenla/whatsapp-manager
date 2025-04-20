@@ -500,6 +500,70 @@ async function salvarComoLista() {
   }
 }
 
+async function salvarMensagemAtual() {
+  const mensagem = document.getElementById('mensagem').value.trim();
+  if (!mensagem) {
+    alert("Mensagem vazia.");
+    return;
+  }
+
+  const titulo = prompt("Dê um título para essa mensagem:");
+  if (!titulo) return;
+
+  const res = await fetch('scripts/mensagens-repositorio.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ titulo, mensagem })
+  });
+
+  const data = await res.json();
+  if (data.ok) {
+    alert("Mensagem salva com sucesso!");
+  } else {
+    alert("Erro ao salvar: " + (data.erro || 'desconhecido'));
+  }
+}
+
+async function abrirLightboxMensagens() {
+  const res = await fetch('scripts/mensagens-repositorio.php');
+  const mensagens = await res.json();
+
+  const container = document.getElementById('listaMensagensSalvas');
+  container.innerHTML = '';
+
+  if (mensagens.length === 0) {
+    container.innerHTML = '<p style="color: #ccc;">Nenhuma mensagem salva ainda.</p>';
+    return;
+  }
+
+  mensagens.forEach((item, index) => {
+    const bloco = document.createElement('div');
+    bloco.style = 'border: 1px solid #00ff88; border-radius: 8px; padding: 10px; margin-bottom: 12px; background: #2a2a2a;';
+
+    bloco.innerHTML = `
+      <strong style="color: #00ff88;">${item.titulo}</strong>
+      <pre style="white-space: pre-wrap; color: #ddd; font-family: inherit;">${item.mensagem}</pre>
+      <button onclick="usarMensagemSalva('${encodeURIComponent(item.mensagem)}')" style="background: #00ff88; color: #000; font-weight: bold; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer;">Usar esta</button>
+    `;
+
+    container.appendChild(bloco);
+  });
+
+  document.getElementById('lightbox-mensagens').style.display = 'block';
+}
+
+function fecharLightboxMensagens() {
+  document.getElementById('lightbox-mensagens').style.display = 'none';
+}
+
+function usarMensagemSalva(mensagemEncoded) {
+  const mensagem = decodeURIComponent(mensagemEncoded);
+  document.getElementById('mensagem').value = mensagem;
+  sincronizarMensagem();
+  fecharLightboxMensagens();
+}
+
+
 window.addEventListener('DOMContentLoaded', async () => {
   atualizarStatusAutomatico();
   await carregarListasSalvas();
