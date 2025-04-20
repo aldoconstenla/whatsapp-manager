@@ -135,7 +135,7 @@ if (file_exists($jsonPath)) {
     </div>
   </div>
 
-  <div id="lightbox-agendamentos-contatos" class="lightbox" style="display: none;">
+  <div id="lightbox-agendar-contato" class="lightbox" style="display: none;">
     <div class="lightbox-inner">
       <h3>📆 Agendar Disparo</h3>
       <p>Atenção: selecione os contatos e a mensagem ANTES de agendar.</p>
@@ -148,7 +148,7 @@ if (file_exists($jsonPath)) {
     </div>
   </div>
 
-  <div id="lightbox-agendamentos-contatos" class="lightbox" style="display: none;">
+  <div id="lightbox-ver-agendamentos" class="lightbox" style="display: none;">
     <div class="lightbox-inner" style="max-height:80vh; overflow:auto;">
       <h3>📅 Disparos Agendados</h3>
       <div id="listaAgendamentosContatos"></div>
