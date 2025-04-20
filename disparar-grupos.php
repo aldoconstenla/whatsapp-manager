@@ -93,7 +93,7 @@ if (file_exists($jsonPath)) {
           <button id="btnReverterIA" onclick="reverterMensagemIA()" style="display: none; margin-right: 10px;">↩ Reverter</button>
           <button id="btnMelhorarIA" onclick="melhorarMensagemComIA()">
             <span class="icon">✨</span>
-            <span class="text">Melhorar com IA</span>
+            <span class="text">Formatar com IA</span>
           </button>
         </div>
       </div>

@@ -83,7 +83,7 @@ if (file_exists($jsonPath)) {
         </button>
         <button id="btnMelhorarIA" onclick="melhorarComIA()">
           <span class="icon">✨</span>
-          <span class="text">Melhorar com IA</span>
+          <span class="text">Formatar com IA</span>
         </button>
       </div>
 
