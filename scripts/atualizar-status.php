@@ -1,28 +1,28 @@
 <?php
 session_start();
 
-// Verifica se veio um corpo de requisição válido
 $input = json_decode(file_get_contents('php://input'), true);
 
-// Validação mínima
-if (!isset($input['usuario'])) {
+// Tenta obter o nome do usuário do corpo ou da sessão
+$usuario = isset($input['usuario']) ? $input['usuario'] : ($_SESSION['usuario'] ?? null);
+
+if (!$usuario) {
   http_response_code(400);
   echo json_encode(['erro' => 'Usuário não informado.']);
   exit;
 }
 
-// Define caminho do status para esse usuário
-$usuario = preg_replace('/[^a-z0-9_-]/i', '', $input['usuario']);
+$usuario = preg_replace('/[^a-z0-9_-]/i', '', $usuario);
 $statusPath = __DIR__ . "/status/status-{$usuario}.json";
 
-// Caso seja um reset (disparo de "limpar")
+// Se for resetar tudo
 if ($input === [] || (isset($input['reset']) && $input['reset'] === true)) {
   file_put_contents($statusPath, json_encode([]));
   echo json_encode(['ok' => true, 'resetado' => true]);
   exit;
 }
 
-// Validação do corpo normal
+// Validação de status individual
 if (!isset($input['telefone']) || !isset($input['status'])) {
   http_response_code(400);
   echo json_encode(['erro' => 'Faltando telefone ou status.']);
@@ -32,14 +32,13 @@ if (!isset($input['telefone']) || !isset($input['status'])) {
 $telefone = preg_replace('/\D/', '', $input['telefone']);
 $status = strtolower(trim($input['status']));
 
-// Carrega status atual
+// Carrega dados existentes
 $dados = file_exists($statusPath) ? json_decode(file_get_contents($statusPath), true) : [];
 
-// Atualiza
+// Atualiza status
 $dados[$telefone] = $status;
 
-// Salva de volta
+// Salva
 file_put_contents($statusPath, json_encode($dados, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-// Sucesso
 echo json_encode(['ok' => true]);
