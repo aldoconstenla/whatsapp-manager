@@ -1,5 +1,5 @@
 <?php
-$arquivo = __DIR__ . "/../mensagens_salvas.json";
+$arquivo = __DIR__ . "/listas_de_envio/mensagens_salvas.json";
 $method = $_SERVER['REQUEST_METHOD'];
 
 if (!file_exists($arquivo)) {
