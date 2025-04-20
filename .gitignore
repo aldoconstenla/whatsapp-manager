@@ -1,4 +1,5 @@
 # Pastas/arquivos que não devem ir pro GitHub
+arquivos_em_teste/
 scripts/status/
 scripts/listas_de_envio/
 scripts/usuarios.json
