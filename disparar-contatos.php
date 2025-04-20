@@ -16,8 +16,8 @@ if (file_exists($jsonPath)) {
 <html lang="pt-br">
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/shared.css">
-  <link rel="stylesheet" href="assets/css/disparar-contatos.css">
+  <link rel="stylesheet" href="assets/css/shared.css?v=<?= time() ?>">
+  <link rel="stylesheet" href="assets/css/disparar-contatos.css?v=<?= time() ?>">
   <meta charset="UTF-8">
   <title>Disparar para Contatos</title>
 </head>
