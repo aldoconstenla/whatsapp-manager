@@ -1,0 +1,116 @@
+.top-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.spreadsheet-container {
+  flex: 2;
+}
+
+.copy-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#dropzone {
+  border: 2px dashed #00ff88;
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.status-enviando { color: #ffc107; }
+.status-enviado { color: #00ff88; }
+.status-erro { color: #ff4d4d; }
+
+.small {
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 10px;
+}
+
+.instance-select {
+  margin-bottom: 20px;
+}
+
+.instance-select label {
+  font-weight: bold;
+  color: #00ff88;
+}
+
+.delete-row {
+  cursor: pointer;
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+.btn-ia-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding-right: 10px;
+}
+
+#btnMelhorarIA {
+  background-color: #00ff88;
+  color: #000;
+  font-weight: bold;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 255, 136, 0.3);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#btnMelhorarIA:hover {
+  background-color: #00cc6f;
+  transform: scale(1.02);
+}
+
+#btnReverterIA {
+  background-color: #444;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #00ff88;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#btnReverterIA:hover {
+  background-color: #555;
+  transform: scale(1.02);
+}
+
+.format-btn {
+  background-color: #1e1e1e;
+  border: 1px solid #00ff88;
+  color: #00ff88;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.format-btn:hover {
+  background-color: #00ff88;
+  color: #000;
+  transform: scale(1.05);
+}

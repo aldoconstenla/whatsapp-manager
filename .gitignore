@@ -1,0 +1,7 @@
+# Pastas/arquivos que não devem ir pro GitHub
+scripts/status/
+scripts/listas_de_envio/
+scripts/usuarios.json
+scripts/mensagem_ia.json
+scripts/instancias.json
+

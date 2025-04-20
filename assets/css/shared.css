@@ -1,0 +1,179 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 40px;
+  background-color: #0f0f0f;
+  color: #f1f1f1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+h1 {
+  color: #00ff88;
+  font-size: 28px;
+}
+
+h2 {
+  margin-top: 60px;
+  color: #00ff88;
+}
+
+.menu-toggle {
+  cursor: pointer;
+  font-size: 28px;
+  color: #00ff88;
+  padding: 10px;
+}
+
+.menu {
+  position: absolute;
+  top: 70px;
+  right: 40px;
+  background-color: #1e1e1e;
+  border: 1px solid #00ff88;
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  z-index: 999;
+  min-width: 200px;
+}
+
+.menu a {
+  padding: 15px;
+  color: #00ff88;
+  text-decoration: none;
+  border-bottom: 1px solid #2c2c2c;
+}
+
+.menu a:hover {
+  background-color: #00ff88;
+  color: #000;
+}
+
+table.spreadsheet,
+.spreadsheet {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.spreadsheet th,
+.spreadsheet td {
+  border: 1px solid #444;
+  padding: 10px;
+  text-align: left;
+}
+
+.spreadsheet th {
+  background-color: #1e1e1e;
+  color: #00ff88;
+}
+
+.spreadsheet td {
+  background-color: #2a2a2a;
+}
+
+.spreadsheet td[contenteditable="true"]:focus {
+  outline: 2px solid #00ff88;
+}
+
+textarea {
+  background-color: #2a2a2a;
+  color: #fff;
+  border: 2px solid #00ff88;
+  border-radius: 10px;
+  padding: 15px;
+  resize: vertical;
+  font-size: 16px;
+  width: 100%;
+  min-height: 280px;
+}
+
+.controls {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.controls button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background-color: #00ff88;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.controls button:hover {
+  background-color: #00cc6f;
+}
+
+select {
+  background-color: #2c2c2c;
+  color: #00ff88;
+  border: 1px solid #00ff88;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.spinner {
+  font-size: 14px;
+  color: #006644;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#btnMelhorarIA .icon {
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+#btnMelhorarIA.loading .icon {
+  animation: spin 0.8s linear infinite;
+}
+
+#btnMelhorarIA.success .icon {
+  animation: none;
+}
+
+/* Extra: útil para status */
+.status-enviando { color: #ffc107; }
+.status-enviado { color: #00ff88; }
+.status-erro { color: #ff4d4d; }
+
+/* Extra: para ícones, botões de formatação, etc */
+.format-btn {
+  background-color: #1e1e1e;
+  border: 1px solid #00ff88;
+  color: #00ff88;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.format-btn:hover {
+  background-color: #00ff88;
+  color: #000;
+  transform: scale(1.05);
+}
