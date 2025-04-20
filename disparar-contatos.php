@@ -51,10 +51,14 @@ if (file_exists($jsonPath)) {
       </div>
 
       <div class="list-controls">
+        <button onclick="abrirLightboxConfirmacao()">🚀 Disparar</button>
+        <button onclick="limpar()">🗑️ Limpar Tudo</button>
+        <button onclick="salvarComoLista()">💾 Salvar Lista</button>
         <select id="selectListaSalva" onchange="carregarListaSelecionada()">
           <option value="">📂 Carregar lista salva...</option>
         </select>
       </div>
+      <div id="mensagem-erro" style="color: #ff4d4d; font-weight: bold; margin-bottom: 10px; display: none;"></div>
 
       <table class="spreadsheet" id="planilha">
         <thead>
@@ -67,12 +71,6 @@ if (file_exists($jsonPath)) {
         </thead>
         <tbody></tbody>
       </table>
-      <div id="mensagem-erro" style="color: #ff4d4d; font-weight: bold; margin-bottom: 10px; display: none;"></div>
-      <div class="controls">
-        <button onclick="abrirLightboxConfirmacao()">🚀 Disparar</button>
-        <button onclick="limpar()">🗑️ Limpar Tudo</button>
-        <button onclick="salvarComoLista()">💾 Salvar Lista</button>
-      </div>
       <div class="small">* Os dados serão salvos ao clicar em Disparar.</div>
     </div>
 
