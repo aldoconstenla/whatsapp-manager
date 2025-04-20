@@ -49,7 +49,7 @@ function addRow(nome = '', telefone = '') {
   const linha = document.createElement('tr');
 
   linha.innerHTML = `
-    <td class="delete-row" onclick="this.parentElement.remove(); atualizarNumeracao()">✖ <span class="numero-linha"></span>.</td>
+    <td class="delete-row" onclick="this.parentElement.remove()">✖</td>
     <td contenteditable="true"></td>
     <td contenteditable="true"></td>
     <td class="status">—</td>
@@ -61,6 +61,7 @@ function addRow(nome = '', telefone = '') {
   if (nome) cells[0].innerText = nome;
   if (telefone) cells[1].innerText = telefone;
 
+  // Evento de Enter no campo Nome → vai pro campo Telefone
   cells[0].addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -68,6 +69,7 @@ function addRow(nome = '', telefone = '') {
     }
   });
 
+  // Evento de Enter no campo Telefone → cria nova linha e foca no próximo Nome
   cells[1].addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -79,23 +81,11 @@ function addRow(nome = '', telefone = '') {
     }
   });
 
+  // Foca no campo nome recém criado (se não for preenchido por paste)
   if (!nome && !telefone) {
     cells[0].focus();
   }
-
-  atualizarNumeracao();
 }
-
-function atualizarNumeracao() {
-  const linhas = document.querySelectorAll('#planilha tbody tr');
-  linhas.forEach((linha, index) => {
-    const numeroSpan = linha.querySelector('.numero-linha');
-    if (numeroSpan) {
-      numeroSpan.textContent = index + 1;
-    }
-  });
-}
-
 
 function limpar() {
   document.querySelector('#planilha tbody').innerHTML = '';
