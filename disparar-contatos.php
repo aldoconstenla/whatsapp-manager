@@ -120,6 +120,7 @@ if (file_exists($jsonPath)) {
       <select id="selectListaSalva" onchange="carregarListaSelecionada()">
         <option value="">📂 Carregar lista salva...</option>
       </select>
+      <button onclick="abrirLightboxAgendarContatos()">⏰ Agendar Disparo</button>
       <button onclick="abrirLightboxAgendamentosContatos()">📅 Ver Agendados</button>
     </div>
   </div>

@@ -641,6 +641,57 @@ function fecharLightboxAgendamentosContatos() {
   document.getElementById('lightbox-agendamentos-contatos').style.display = 'none';
 }
 
+function abrirLightboxAgendarContatos() {
+  document.getElementById('lightbox-agendamentos-contatos').style.display = 'flex';
+}
+
+function fecharLightboxAgendar() {
+  document.getElementById('lightbox-agendamentos-contatos').style.display = 'none';
+}
+
+async function salvarAgendamento() {
+  const nome = document.getElementById('nomeAgendamento').value.trim();
+  const dataHora = document.getElementById('dataHoraAgendamento').value;
+  const mensagem = document.getElementById('mensagem').value.trim();
+  const [instancia, porta] = document.getElementById('instancia').value.split('|');
+
+  const rows = document.querySelectorAll('#planilha tbody tr');
+  const contatos = [...rows].map(row => ({
+    nome: row.cells[1].innerText,
+    telefone: row.cells[2].innerText.replace(/[^\d]/g, '')
+  })).filter(c => c.telefone);
+
+  if (!nome || !dataHora || !mensagem || contatos.length === 0) {
+    alert("Preencha todos os campos e selecione os contatos.");
+    return;
+  }
+
+  const payload = {
+    nome,
+    dataHora,
+    mensagem,
+    contatos,
+    instancia,
+    porta,
+    systemURL: WEBHOOKS.systemURL
+  };
+
+  const res = await fetch('scripts/disparos-agendados-contatos.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+
+  const json = await res.json();
+  if (json.ok) {
+    alert("✅ Agendamento salvo!");
+    fecharLightboxAgendar();
+  } else {
+    alert("❌ Erro ao salvar agendamento.");
+  }
+}
+
+
 
 window.addEventListener('DOMContentLoaded', async () => {
   atualizarStatusAutomatico();
