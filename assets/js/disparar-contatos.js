@@ -584,6 +584,63 @@ async function excluirMensagemSalva(index) {
   }
 }
 
+function abrirLightboxAgendamentosContatos() {
+  fetch('scripts/disparos-agendados-contatos.php')
+    .then(res => res.json())
+    .then(lista => {
+      const container = document.getElementById('listaAgendamentosContatos');
+      if (!Array.isArray(lista) || lista.length === 0) {
+        container.innerHTML = "<p style='color:#ccc;'>Nenhum disparo agendado.</p>";
+        return;
+      }
+
+      lista.sort((a, b) => new Date(a.dataHora) - new Date(b.dataHora));
+
+      container.innerHTML = '';
+      lista.forEach((item, index) => {
+        const contatosHtml = item.contatos.map(c => `${c.nome || 'Sem nome'} (${c.telefone})`).join('<br>');
+        const dataFormatada = new Date(item.dataHora).toLocaleString('pt-BR', {
+          day: '2-digit', month: '2-digit', year: 'numeric',
+          hour: '2-digit', minute: '2-digit'
+        }).replace(',', '');
+
+        container.innerHTML += `
+          <div style="border:1px solid #00ff88; border-radius:8px; padding:10px; margin:10px 0; position:relative;">
+            <div style="position:absolute; top:10px; right:10px; font-size:12px; color:#aaa;">
+              🔧 ${item.instancia}
+            </div>
+            <strong style="color:#00ff88;">📌 ${item.nome}</strong> | <span style="color:#00c8ff;">📅 ${dataFormatada}</span><br>
+            <span style="color:#ccc;">📱 ${contatosHtml}</span><br><br>
+            <span style="color:#fff;">📄 <strong>Mensagem:</strong><br>${item.mensagem}</span>
+            <div style="margin-top:10px; text-align:right;">
+              <button onclick="excluirAgendamentoContatos(${index})" style="background:#ff4d4d; color:#fff; padding:6px 12px; border:none; border-radius:6px;">Excluir</button>
+            </div>
+          </div>`;
+      });
+
+      document.getElementById('lightbox-agendamentos-contatos').style.display = 'flex';
+    });
+}
+
+async function excluirAgendamentoContatos(index) {
+  const confirma = confirm("Deseja excluir este agendamento?");
+  if (!confirma) return;
+
+  const res = await fetch('scripts/disparos-agendados-contatos.php', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ index })
+  });
+
+  const json = await res.json();
+  if (json.ok) abrirLightboxAgendamentosContatos();
+  else alert("❌ Erro ao excluir agendamento.");
+}
+
+function fecharLightboxAgendamentosContatos() {
+  document.getElementById('lightbox-agendamentos-contatos').style.display = 'none';
+}
+
 
 window.addEventListener('DOMContentLoaded', async () => {
   atualizarStatusAutomatico();

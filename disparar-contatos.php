@@ -120,6 +120,7 @@ if (file_exists($jsonPath)) {
       <select id="selectListaSalva" onchange="carregarListaSelecionada()">
         <option value="">📂 Carregar lista salva...</option>
       </select>
+      <button onclick="abrirLightboxAgendamentosContatos()">📅 Ver Agendados</button>
     </div>
   </div>
 
@@ -129,6 +130,29 @@ if (file_exists($jsonPath)) {
       <div id="listaMensagensSalvas"></div>
       <div style="text-align: right; margin-top: 20px;">
         <button onclick="fecharLightboxMensagens()" style="background: #444; color: #fff; padding: 10px 20px; border: 1px solid #00ff88; border-radius: 8px; cursor: pointer;">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="lightbox-agendamentos-contatos" class="lightbox" style="display: none;">
+    <div class="lightbox-inner">
+      <h3>📆 Agendar Disparo</h3>
+      <p>Atenção: selecione os contatos e a mensagem ANTES de agendar.</p>
+      <input type="text" id="nomeAgendamento" placeholder="Nome do agendamento">
+      <input type="datetime-local" id="dataHoraAgendamento">
+      <div style="margin-top: 20px;">
+        <button onclick="salvarAgendamento()" style="background:#00ff88; color:#000; padding:8px 16px; border:none; border-radius:6px;">💾 Salvar</button>
+        <button onclick="fecharLightboxAgendar()" style="background:#444; color:#fff; padding:8px 16px; border:none; border-radius:6px;">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="lightbox-agendamentos-contatos" class="lightbox" style="display: none;">
+    <div class="lightbox-inner" style="max-height:80vh; overflow:auto;">
+      <h3>📅 Disparos Agendados</h3>
+      <div id="listaAgendamentosContatos"></div>
+      <div style="margin-top:20px; text-align:right;">
+        <button onclick="fecharLightboxAgendamentosContatos()" style="background:#444; color:#fff; padding:10px 20px; border-radius:8px;">Fechar</button>
       </div>
     </div>
   </div>
