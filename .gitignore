@@ -8,3 +8,4 @@ scripts/instancias.json
 scripts/lista_grupos.json
 scripts/status.json
 scripts/status_grupos.json
+scripts/instanciador.php
