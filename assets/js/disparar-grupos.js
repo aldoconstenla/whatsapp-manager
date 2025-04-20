@@ -702,6 +702,96 @@ function fecharLightboxDescricao() {
   document.getElementById('lightbox-descricao').style.display = 'none';
 }
 
+function formatarTexto(tipo) {
+  const textarea = document.getElementById('mensagemGrupos');
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  const textoSelecionado = textarea.value.substring(start, end);
+
+  let simbolo = tipo === 'negrito' ? '*' : '_';
+  const novoTexto = simbolo + textoSelecionado + simbolo;
+
+  textarea.setRangeText(novoTexto, start, end, 'end');
+  textarea.focus();
+}
+
+async function salvarMensagemAtual() {
+  const mensagem = document.getElementById('mensagemGrupos').value.trim();
+  if (!mensagem) return alert("Mensagem vazia.");
+
+  const titulo = prompt("Dê um título para essa mensagem:");
+  if (!titulo) return;
+
+  const res = await fetch('scripts/mensagens-repositorio-grupos.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ titulo, mensagem })
+  });
+
+  const data = await res.json();
+  if (data.ok) alert("Mensagem salva com sucesso!");
+  else alert("Erro ao salvar.");
+}
+
+async function abrirLightboxMensagens() {
+  const res = await fetch('scripts/mensagens-repositorio-grupos.php');
+  const mensagens = await res.json();
+
+  const container = document.getElementById('listaMensagensSalvas');
+  container.innerHTML = '';
+
+  if (mensagens.length === 0) {
+    container.innerHTML = '<p style="color: #ccc;">Nenhuma mensagem salva ainda.</p>';
+    return;
+  }
+
+  mensagens.forEach((item, index) => {
+    const bloco = document.createElement('div');
+    bloco.style = 'border: 1px solid #00ff88; border-radius: 8px; padding: 10px; margin-bottom: 12px; background: #2a2a2a;';
+
+    bloco.innerHTML = `
+      <strong style="color: #00ff88;">${item.titulo}</strong>
+      <pre style="white-space: pre-wrap; color: #ddd; font-family: inherit;">${item.mensagem}</pre>
+      <div style="display: flex; gap: 10px;">
+        <button onclick="usarMensagemSalva('${encodeURIComponent(item.mensagem)}')" style="background: #00ff88; color: #000; font-weight: bold; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer;">Usar esta</button>
+        <button onclick="excluirMensagemSalva(${index})" style="background: #ff4d4d; color: #fff; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer;">Excluir</button>
+      </div>
+    `;
+    container.appendChild(bloco);
+  });
+
+  document.getElementById('lightbox-mensagens').style.display = 'block';
+}
+
+function fecharLightboxMensagens() {
+  document.getElementById('lightbox-mensagens').style.display = 'none';
+}
+
+function usarMensagemSalva(mensagemEncoded) {
+  const mensagem = decodeURIComponent(mensagemEncoded);
+  document.getElementById('mensagemGrupos').value = mensagem;
+  fecharLightboxMensagens();
+}
+
+async function excluirMensagemSalva(index) {
+  const confirmacao = confirm("Tem certeza que deseja excluir esta mensagem?");
+  if (!confirmacao) return;
+
+  const res = await fetch('scripts/mensagens-repositorio-grupos.php', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ index })
+  });
+
+  const data = await res.json();
+  if (data.ok) {
+    await abrirLightboxMensagens(); // atualiza a lista
+  } else {
+    alert("Erro ao excluir: " + (data.erro || 'desconhecido'));
+  }
+}
+
+
 async function salvarDescricaoGrupo() {
   const btnSalvar = document.querySelector('#lightbox-descricao button');
   const novaDescricao = document.getElementById('novaDescricaoTexto').value.trim();

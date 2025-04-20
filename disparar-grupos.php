@@ -49,7 +49,6 @@ if (file_exists($jsonPath)) {
         </option>
       <?php endforeach; ?>
     </select>
-    <button id="btnObterGrupos" onclick="obterGrupos()">🔍 Obter Grupos</button>
   </div>
 
   <!-- Seção 1: Obter IDs dos grupos -->
@@ -81,14 +80,16 @@ if (file_exists($jsonPath)) {
           <thead><tr><th>❌</th><th>Nome</th><th>ID</th><th>Status</th></tr></thead>
           <tbody></tbody>
         </table>
-        <div class="controls">
-          <button class="btn-Disparar-Grupos" onclick="abrirLightboxConfirmacao()">🚀 Disparar para Grupos</button>
-        </div>
-
       </div>
 
       <!-- Coluna do textarea e botões -->
       <div class="col-40">
+        <div class="format-buttons" style="margin-bottom: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
+          <button type="button" class="format-btn" onclick="formatarTexto('negrito')"><strong>B</strong></button>
+          <button type="button" class="format-btn" onclick="formatarTexto('italico')"><em>I</em></button>
+          <button type="button" class="format-btn" onclick="salvarMensagemAtual()">💾</button>
+          <button type="button" class="format-btn" onclick="abrirLightboxMensagens()">📂</button>
+        </div>
         <textarea id="mensagemGrupos" placeholder="Digite a mensagem."></textarea>
         <div class="controls">
           <button id="btnReverterIA" onclick="reverterMensagemIA()" style="display: none; margin-right: 10px;">↩ Reverter</button>
@@ -130,6 +131,23 @@ if (file_exists($jsonPath)) {
         <button onclick="salvarDescricaoGrupo()" style="background:#00ff88; color:#000; padding:8px 16px; border:none; border-radius:6px; cursor: pointer;">Salvar</button>
         <button onclick="fecharLightboxDescricao()" style="background:#555; color:#fff; padding:8px 16px; border:none; border-radius:6px;">Cancelar</button>
       </div>
+    </div>
+  </div>
+
+  <div id="lightbox-mensagens" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 9999; overflow-y: auto;">
+    <div style="max-width: 600px; margin: 60px auto; background: #1e1e1e; padding: 20px; border-radius: 12px; border: 2px solid #00ff88;">
+      <h2 style="color: #00ff88;">📂 Mensagens Salvas</h2>
+      <div id="listaMensagensSalvas"></div>
+      <div style="text-align: right; margin-top: 20px;">
+        <button onclick="fecharLightboxMensagens()" style="background: #444; color: #fff; padding: 10px 20px; border: 1px solid #00ff88; border-radius: 8px; cursor: pointer;">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-buttons">
+      <button onclick="abrirLightboxConfirmacao()">🚀 Disparar</button>
+      <button onclick="obterGrupos()">🔍 Obter Grupos</button>
     </div>
   </div>
 
