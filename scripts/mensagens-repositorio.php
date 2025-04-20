@@ -27,4 +27,30 @@ if ($method === 'POST') {
     file_put_contents($arquivo, json_encode($mensagens, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
     echo json_encode(['ok' => true]);
+    exit;
+}
+
+if ($method === 'DELETE') {
+    $dados = json_decode(file_get_contents("php://input"), true);
+    $index = $dados['index'] ?? null;
+
+    if (!is_numeric($index)) {
+        http_response_code(400);
+        echo json_encode(['erro' => 'Índice inválido.']);
+        exit;
+    }
+
+    $mensagens = json_decode(file_get_contents($arquivo), true);
+
+    if (!isset($mensagens[$index])) {
+        http_response_code(404);
+        echo json_encode(['erro' => 'Mensagem não encontrada.']);
+        exit;
+    }
+
+    array_splice($mensagens, $index, 1);
+    file_put_contents($arquivo, json_encode($mensagens, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+    echo json_encode(['ok' => true]);
+    exit;
 }

@@ -540,11 +540,14 @@ async function abrirLightboxMensagens() {
     const bloco = document.createElement('div');
     bloco.style = 'border: 1px solid #00ff88; border-radius: 8px; padding: 10px; margin-bottom: 12px; background: #2a2a2a;';
 
-    bloco.innerHTML = `
-      <strong style="color: #00ff88;">${item.titulo}</strong>
-      <pre style="white-space: pre-wrap; color: #ddd; font-family: inherit;">${item.mensagem}</pre>
+  bloco.innerHTML = `
+    <strong style="color: #00ff88;">${item.titulo}</strong>
+    <pre style="white-space: pre-wrap; color: #ddd; font-family: inherit;">${item.mensagem}</pre>
+    <div style="display: flex; gap: 10px;">
       <button onclick="usarMensagemSalva('${encodeURIComponent(item.mensagem)}')" style="background: #00ff88; color: #000; font-weight: bold; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer;">Usar esta</button>
-    `;
+      <button onclick="excluirMensagemSalva(${index})" style="background: #ff4d4d; color: #fff; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer;">Excluir</button>
+    </div>
+  `;
 
     container.appendChild(bloco);
   });
@@ -561,6 +564,24 @@ function usarMensagemSalva(mensagemEncoded) {
   document.getElementById('mensagem').value = mensagem;
   sincronizarMensagem();
   fecharLightboxMensagens();
+}
+
+async function excluirMensagemSalva(index) {
+  const confirmacao = confirm("Tem certeza que deseja excluir esta mensagem?");
+  if (!confirmacao) return;
+
+  const res = await fetch('scripts/mensagens-repositorio.php', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ index })
+  });
+
+  const data = await res.json();
+  if (data.ok) {
+    await abrirLightboxMensagens(); // atualiza a lista
+  } else {
+    alert("Erro ao excluir: " + (data.erro || 'desconhecido'));
+  }
 }
 
 
