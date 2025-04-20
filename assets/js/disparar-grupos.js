@@ -1000,6 +1000,8 @@ function abrirLightboxAgendamentos() {
         return;
       }
 
+      lista.sort((a, b) => new Date(a.dataHora) - new Date(b.dataHora));
+
       container.innerHTML = '';
       lista.forEach((item, index) => {
         const gruposHtml = item.grupos.map(g => `${g.nome} (${g.id})`).join('<br>');
@@ -1014,17 +1016,13 @@ function abrirLightboxAgendamentos() {
         }).replace(',', '');
 
         container.innerHTML += `
-          <div style="border:1px solid #00ff88; border-radius:8px; padding:16px 20px; margin:16px 0; background:#1a1a1a; color:#eee;">
-            <div style="font-weight:bold; color:#00ff88; font-size:16px;">
-              📌 ${item.nome} | 📅 ${dataFormatada}
+          <div style="border:1px solid #00ff88; border-radius:8px; padding:10px; margin:10px 0; position:relative;">
+            <div style="position:absolute; top:10px; right:10px; font-size:12px; color:#aaa;">
+              🔧 ${item.instancia}
             </div>
-            <div style="margin-top:10px;">
-              👥 ${gruposHtml}
-            </div>
-            <div style="margin-top:10px;">
-              📝 <strong>Mensagem:</strong><br>
-              <pre style="white-space: pre-wrap; font-family: inherit; color: #ccc; margin-top: 4px;">${item.mensagem}</pre>
-            </div>
+            <strong style="color:#00ff88;">📌 ${item.nome}</strong> | <span style="color:#00c8ff;">📅 ${formatarDataHora(item.dataHora)}</span><br>
+            <span style="color:#ccc;">👥 ${item.grupos.map(g => `${g.nome} (${g.id})`).join('<br>')}</span><br><br>
+            <span style="color:#fff;">📄 <strong>Mensagem:</strong><br>${item.mensagem}</span>
             <div style="margin-top:10px; text-align:right;">
               <button onclick="excluirAgendamento(${index})" style="background:#ff4d4d; color:#fff; padding:6px 12px; border:none; border-radius:6px;">Excluir</button>
             </div>
@@ -1033,6 +1031,14 @@ function abrirLightboxAgendamentos() {
       });
       document.getElementById('lightbox-agendamentos').style.display = 'flex';
     });
+}
+
+function formatarDataHora(isoStr) {
+  const d = new Date(isoStr);
+  return d.toLocaleString('pt-BR', {
+    day: '2-digit', month: '2-digit', year: 'numeric',
+    hour: '2-digit', minute: '2-digit'
+  });
 }
 
 function fecharLightboxAgendamentos() {
