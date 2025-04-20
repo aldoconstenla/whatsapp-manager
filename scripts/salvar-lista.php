@@ -10,7 +10,7 @@ if (!$nome || !is_array($contatos)) {
   exit;
 }
 
-$caminho = __DIR__ . "/../listas_de_envio/lista-{$nome}.json";
+$caminho = __DIR__ . "/listas_de_envio/lista-{$nome}.json";
 $salvo = file_put_contents($caminho, json_encode($contatos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
 if ($salvo === false) {
