@@ -131,30 +131,62 @@
 
 .footer-buttons {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 
 .footer-buttons button,
 .footer-buttons select {
-  padding: 10px 20px;
   font-weight: bold;
-  border: none;
   border-radius: 8px;
-  background-color: #00ff88;
-  color: #000;
+  border: none;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
 
 .footer-buttons button:hover {
-  background-color: #00cc6f;
+  transform: scale(1.03);
 }
 
+/* Botão Disparar – destaque */
+.footer-buttons button:nth-child(1) {
+  background-color: #00ff88;
+  color: #000;
+  font-size: 18px;
+  padding: 14px 32px;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+  border: 2px solid #00ff88;
+}
+
+.footer-buttons button:nth-child(1):hover {
+  background-color: #00cc6f;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+}
+
+/* Demais botões – discretos */
+.footer-buttons button:nth-child(2),
+.footer-buttons button:nth-child(3) {
+  background-color: #1e1e1e;
+  color: #00ff88;
+  font-size: 14px;
+  padding: 10px 20px;
+  border: 1px solid #00ff88;
+}
+
+.footer-buttons button:nth-child(2):hover,
+.footer-buttons button:nth-child(3):hover {
+  background-color: #00ff88;
+  color: #000;
+}
+
+/* Select de lista */
 .footer-buttons select {
   background-color: #2c2c2c;
   color: #00ff88;
+  padding: 10px 16px;
+  font-size: 14px;
   border: 1px solid #00ff88;
 }
 
