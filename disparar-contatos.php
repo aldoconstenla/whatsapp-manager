@@ -44,6 +44,14 @@ if (file_exists($jsonPath)) {
     </select>
   </div>
 
+  <div class="list-controls">
+    <select id="selectListaSalva" onchange="carregarListaSelecionada()">
+      <option value="">📂 Carregar lista salva...</option>
+    </select>
+    <button onclick="salvarComoLista()">💾 Salvar como Lista</button>
+  </div>
+
+
   <div class="top-controls">
     <div class="spreadsheet-container">
       <div id="dropzone" contenteditable="true" onpaste="handlePaste(event)">

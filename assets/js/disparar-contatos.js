@@ -414,9 +414,80 @@ async function salvarSessaoAtual() {
   }
 }
 
+async function carregarListasSalvas() {
+  try {
+    const res = await fetch('scripts/listar-listas.php');
+    const listas = await res.json();
+
+    const select = document.getElementById('selectListaSalva');
+    select.innerHTML = '<option value="">📂 Carregar lista salva...</option>';
+    listas.forEach(nome => {
+      const opt = document.createElement('option');
+      opt.value = nome;
+      opt.textContent = nome;
+      select.appendChild(opt);
+    });
+  } catch (err) {
+    console.warn('Erro ao carregar listas salvas:', err);
+  }
+}
+
+async function carregarListaSelecionada() {
+  const nome = document.getElementById('selectListaSalva').value;
+  if (!nome) return;
+
+  try {
+    const res = await fetch(`scripts/carregar-lista.php?nome=${encodeURIComponent(nome)}`);
+    const data = await res.json();
+
+    document.querySelector('#planilha tbody').innerHTML = '';
+    (data || []).forEach(contato => {
+      addRow(contato.nome, contato.telefone);
+    });
+  } catch (err) {
+    alert('Erro ao carregar a lista selecionada.');
+  }
+}
+
+async function salvarComoLista() {
+  const nomeLista = prompt("Digite um nome para salvar esta lista:");
+  if (!nomeLista) return;
+
+  const contatos = [];
+  const rows = document.querySelectorAll('#planilha tbody tr');
+  for (const row of rows) {
+    const nome = row.cells[1].innerText.trim();
+    const telefone = row.cells[2].innerText.replace(/[^\d]/g, '').trim();
+    if (telefone) contatos.push({ nome, telefone });
+  }
+
+  if (contatos.length === 0) {
+    alert("A lista está vazia.");
+    return;
+  }
+
+  try {
+    const res = await fetch('scripts/salvar-lista.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome: nomeLista, contatos })
+    });
+
+    const data = await res.json();
+    if (data.ok) {
+      alert("Lista salva com sucesso!");
+      await carregarListasSalvas();
+    } else {
+      alert("Erro ao salvar a lista.");
+    }
+  } catch (err) {
+    alert("Erro ao salvar a lista.");
+  }
+}
 
 window.addEventListener('DOMContentLoaded', async () => {
   atualizarStatusAutomatico();
+  await carregarListasSalvas();
 
   try {
     const res = await fetch('scripts/carregar-sessao.php');
