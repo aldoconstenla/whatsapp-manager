@@ -15,5 +15,5 @@ $urlPaths = [
 
   // Outros
   'extrair_contatos'     => 'https://SEU_WEBHOOK_EXTRAR_CONTATOS',
-  'system_URL'           => 'http://5.189.148.139:81/jutsu-whatsapp-manager'
+  'system_URL'           => 'http://5.189.148.139:81/whatsapp-manager'
 ];
