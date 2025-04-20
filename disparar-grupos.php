@@ -147,7 +147,7 @@ if (file_exists($jsonPath)) {
   <div class="footer-bar">
     <div class="footer-buttons">
       <button onclick="abrirLightboxConfirmacao()">🚀 Disparar</button>
-      <button onclick="obterGrupos()">🔍 Obter Grupos</button>
+      <button id="btnObterGrupos" onclick="obterGrupos()">🔍 Obter Grupos</button>
     </div>
   </div>
 
