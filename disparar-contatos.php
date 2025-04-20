@@ -62,7 +62,7 @@ if (file_exists($jsonPath)) {
         </thead>
         <tbody></tbody>
       </table>
-      <div class="small">* Os dados serão salvos ao clicar em Disparar.</div>
+      <div class="small">* Os dados serão salvos na sessão ao clicar em Disparar.<br><i>(clique em Limpar para remover sessão ativa)</i></div>
     </div>
 
     <div class="copy-container">
