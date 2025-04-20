@@ -941,6 +941,101 @@ async function salvarContatosComoLista() {
   }
 }
 
+function abrirLightboxAgendamento() {
+  document.getElementById('lightbox-agendar').style.display = 'flex';
+}
+function fecharLightboxAgendar() {
+  document.getElementById('lightbox-agendar').style.display = 'none';
+}
+
+async function salvarAgendamento() {
+  const nome = document.getElementById('nomeAgendamento').value.trim();
+  const dataHora = document.getElementById('dataHoraAgendamento').value;
+  const mensagem = document.getElementById('mensagemGrupos').value.trim();
+  const [instancia, porta] = document.getElementById('instanciaSelect').value.split('|');
+
+  const rows = document.querySelectorAll('#tabelaDisparo tbody tr');
+  const grupos = [...rows].map(row => ({
+    nome: row.cells[1].innerText,
+    id: row.cells[2].innerText
+  }));
+
+  if (!nome || !dataHora || !mensagem || grupos.length === 0) {
+    alert("Preencha todos os campos e selecione os grupos.");
+    return;
+  }
+
+  const payload = {
+    nome,
+    dataHora,
+    grupos,
+    mensagem,
+    instancia,
+    porta,
+    systemURL: WEBHOOKS.systemURL
+  };
+
+  const res = await fetch('scripts/disparos-agendados.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+
+  const json = await res.json();
+  if (json.ok) {
+    alert("✅ Agendamento salvo!");
+    fecharLightboxAgendar();
+  } else {
+    alert("❌ Erro ao salvar agendamento.");
+  }
+}
+
+function abrirLightboxAgendamentos() {
+  fetch('scripts/disparos-agendados.php')
+    .then(res => res.json())
+    .then(lista => {
+      const container = document.getElementById('listaAgendamentos');
+      if (!Array.isArray(lista) || lista.length === 0) {
+        container.innerHTML = "<p style='color:#ccc;'>Nenhum disparo agendado.</p>";
+        return;
+      }
+
+      container.innerHTML = '';
+      lista.forEach((item, index) => {
+        const gruposHtml = item.grupos.map(g => `${g.nome} (${g.id})`).join('<br>');
+        container.innerHTML += `
+          <div style="border:1px solid #00ff88; border-radius:8px; padding:10px; margin:10px 0;">
+            <strong style="color:#00ff88;">${item.nome}</strong><br>
+            <small>📅 ${item.dataHora}</small><br><br>
+            ${gruposHtml}
+            <div style="margin-top:10px; text-align:right;">
+              <button onclick="excluirAgendamento(${index})" style="background:#ff4d4d; color:#fff; padding:6px 12px; border:none; border-radius:6px;">Excluir</button>
+            </div>
+          </div>`;
+      });
+      document.getElementById('lightbox-agendamentos').style.display = 'flex';
+    });
+}
+
+function fecharLightboxAgendamentos() {
+  document.getElementById('lightbox-agendamentos').style.display = 'none';
+}
+
+async function excluirAgendamento(index) {
+  const confirma = confirm("Deseja excluir este agendamento?");
+  if (!confirma) return;
+
+  const res = await fetch('scripts/disparos-agendados.php', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ index })
+  });
+
+  const json = await res.json();
+  if (json.ok) abrirLightboxAgendamentos();
+  else alert("❌ Erro ao excluir agendamento.");
+}
+
 document.addEventListener('click', fecharContextMenu);
 document.addEventListener('scroll', fecharContextMenu, true); // true propaga até os scrolls internos
 window.addEventListener('resize', fecharContextMenu);

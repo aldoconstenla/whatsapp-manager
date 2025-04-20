@@ -146,6 +146,8 @@ if (file_exists($jsonPath)) {
     <div class="footer-buttons">
       <button onclick="abrirLightboxConfirmacao()">🚀 Disparar</button>
       <button id="btnObterGrupos" onclick="obterGrupos()">🔍 Obter Grupos</button>
+      <button onclick="abrirLightboxAgendamento()">⏰ Agendar Disparo</button>
+      <button onclick="abrirLightboxAgendamentos()">📅 Ver Agendados</button>
     </div>
   </div>
 
@@ -158,6 +160,29 @@ if (file_exists($jsonPath)) {
         <button onclick="exportarContatosCSV()" style="background:#00ff88; color:#000; padding:10px 20px; border:none; border-radius:6px; cursor:pointer;">⬇ Exportar CSV</button>
         <button onclick="salvarContatosComoLista()" style="background:#00ff88; color:#000; padding:10px 20px; border:none; border-radius:6px; cursor:pointer;">💾 Salvar como Lista</button>
         <button onclick="fecharLightboxContatos()" style="background:#444; color:#fff; padding:10px 20px; border:none; border-radius:6px;">❌ Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="lightbox-agendar" class="lightbox" style="display: none;">
+    <div class="lightbox-inner">
+      <h3>📆 Agendar Disparo</h3>
+      <p>Atenção: selecione os grupos e a mensagem ANTES de agendar.</p>
+      <input type="text" id="nomeAgendamento" placeholder="Nome do agendamento">
+      <input type="datetime-local" id="dataHoraAgendamento">
+      <div style="margin-top: 20px;">
+        <button onclick="salvarAgendamento()" style="background:#00ff88; color:#000; padding:8px 16px; border:none; border-radius:6px;">💾 Salvar</button>
+        <button onclick="fecharLightboxAgendar()" style="background:#444; color:#fff; padding:8px 16px; border:none; border-radius:6px;">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="lightbox-agendamentos" class="lightbox" style="display: none;">
+    <div class="lightbox-inner" style="max-height:80vh; overflow:auto;">
+      <h3>📅 Disparos Agendados</h3>
+      <div id="listaAgendamentos"></div>
+      <div style="margin-top:20px; text-align:right;">
+        <button onclick="fecharLightboxAgendamentos()" style="background:#444; color:#fff; padding:10px 20px; border-radius:8px;">Fechar</button>
       </div>
     </div>
   </div>
