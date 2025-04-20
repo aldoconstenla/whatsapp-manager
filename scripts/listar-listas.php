@@ -1,5 +1,5 @@
 <?php
-$arquivos = glob(__DIR__ . '/../listas_de_envio/lista-*.json');
+$arquivos = glob(__DIR__ . '/listas_de_envio/lista-*.json');
 $listas = [];
 
 foreach ($arquivos as $arquivo) {
