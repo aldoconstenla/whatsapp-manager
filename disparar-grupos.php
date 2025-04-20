@@ -71,8 +71,6 @@ if (file_exists($jsonPath)) {
 
   <!-- Seção 2: Disparar para Grupos -->
   <div class="section">
-    <h2>🚀 Disparar para Grupos</h2>
-
     <div class="row">
       <!-- Coluna da tabela -->
       <div class="col-60">
