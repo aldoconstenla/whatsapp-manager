@@ -618,7 +618,7 @@ function abrirLightboxAgendamentosContatos() {
           </div>`;
       });
 
-      document.getElementById('lightbox-agendamentos-contatos').style.display = 'flex';
+      document.getElementById('lightbox-ver-agendamentos').style.display = 'flex';
     });
 }
 
@@ -638,15 +638,15 @@ async function excluirAgendamentoContatos(index) {
 }
 
 function fecharLightboxAgendamentosContatos() {
-  document.getElementById('lightbox-agendamentos-contatos').style.display = 'none';
+  document.getElementById('lightbox-ver-agendamentos').style.display = 'none';
 }
 
 function abrirLightboxAgendarContatos() {
-  document.getElementById('lightbox-agendamentos-contatos').style.display = 'flex';
+  document.getElementById('lightbox-agendar-contato').style.display = 'flex';
 }
 
 function fecharLightboxAgendar() {
-  document.getElementById('lightbox-agendamentos-contatos').style.display = 'none';
+  document.getElementById('lightbox-agendar-contato').style.display = 'none';
 }
 
 async function salvarAgendamento() {
