@@ -155,6 +155,7 @@ contextMenu.style = `
 contextMenu.innerHTML = `
   <div class="context-option" onclick="editarNomeGrupo(this)">✏️ Alterar nome</div>
   <div class="context-option" onclick="abrirLightboxDescricao(this)">📋 Mudar descrição</div>
+  <div class="context-option" onclick="extrairContatosGrupo()">📥 Extrair contatos</div>
 `;
 document.body.appendChild(contextMenu);
 

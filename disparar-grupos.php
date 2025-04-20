@@ -149,6 +149,19 @@ if (file_exists($jsonPath)) {
     </div>
   </div>
 
+  <div id="lightbox-contatos" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.8); z-index:9999; align-items:center; justify-content:center; flex-direction:column;">
+    <div style="background:#1e1e1e; padding:30px; border-radius:10px; border:2px solid #00ff88; width:90%; max-width:600px; color:#fff;">
+      <h3 id="contatosQuantidade" style="color:#00ff88;">📱 Contatos extraídos</h3>
+      <div id="contatosTabela" style="max-height:300px; overflow:auto; margin-top:15px;"></div>
+
+      <div style="margin-top:20px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+        <button onclick="exportarContatosCSV()" style="background:#00ff88; color:#000; padding:10px 20px; border:none; border-radius:6px; cursor:pointer;">⬇ Exportar CSV</button>
+        <button onclick="salvarContatosComoLista()" style="background:#00ff88; color:#000; padding:10px 20px; border:none; border-radius:6px; cursor:pointer;">💾 Salvar como Lista</button>
+        <button onclick="fecharLightboxContatos()" style="background:#444; color:#fff; padding:10px 20px; border:none; border-radius:6px;">❌ Fechar</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const WEBHOOKS = {
       melhorarIA: "<?= $urlPaths['melhorar_ia'] ?>",
