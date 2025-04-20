@@ -21,6 +21,21 @@ function handlePaste(e) {
   e.preventDefault();
   const clipboard = (e.clipboardData || window.clipboardData).getData('text');
   const linhas = clipboard.trim().split('\n');
+
+  // Remove linhas completamente vazias da tabela ANTES de colar
+  const tbody = document.querySelector('#planilha tbody');
+  const linhasExistentes = Array.from(tbody.querySelectorAll('tr'));
+
+  const linhasComDados = linhasExistentes.filter(tr => {
+    const nome = tr.cells[1].innerText.trim();
+    const telefone = tr.cells[2].innerText.trim();
+    return nome || telefone;
+  });
+
+  if (linhasComDados.length === 0) {
+    tbody.innerHTML = ''; // Limpa todas se não houver dados úteis
+  }
+
   linhas.forEach(linha => {
     const colunas = linha.split('\t');
     const nome = colunas.length === 2 ? colunas[0].trim() : '';
