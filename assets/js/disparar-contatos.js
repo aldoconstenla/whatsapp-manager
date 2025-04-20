@@ -87,7 +87,7 @@ function limpar() {
   fetch(`scripts/atualizar-status.php`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ usuario: USUARIO_LOGADO })
+    body: JSON.stringify({ usuario: USUARIO_LOGADO, reset: true })
   });
 
   // Reseta a sessão persistente
