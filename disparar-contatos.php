@@ -46,7 +46,7 @@ if (file_exists($jsonPath)) {
 
   <div class="top-controls">
     <div class="spreadsheet-container">
-
+      <div id="mensagem-erro" style="color: #ff4d4d; font-weight: bold; margin-bottom: 10px; display: none;"></div>
       <div id="dropzone" contenteditable="true" onpaste="handlePaste(event)">
         Clique aqui e cole os nomes e/ou números
       </div>
@@ -113,7 +113,6 @@ if (file_exists($jsonPath)) {
   </div>
 
   <div class="footer-bar">
-    <div id="mensagem-erro" style="color: #ff4d4d; font-weight: bold; margin-bottom: 10px; display: none;"></div>
     <div class="footer-buttons">
       <button onclick="abrirLightboxConfirmacao()">🚀 Disparar</button>
       <button onclick="limpar()">🗑️ Limpar</button>
