@@ -49,13 +49,11 @@ if (file_exists($jsonPath)) {
         </option>
       <?php endforeach; ?>
     </select>
+    <button id="btnObterGrupos" onclick="obterGrupos()">🔍 Obter Grupos</button>
   </div>
 
   <!-- Seção 1: Obter IDs dos grupos -->
   <div class="section">
-    <div class="section">
-      <button id="btnObterGrupos" onclick="obterGrupos()">🔍 Obter Grupos</button>
-    </div>
     <div class="section" id="gruposListados" style="display: none;">
       <input type="text" id="buscaGrupo" placeholder="🔍 Buscar grupo...">
       <div id="instrucoesGrupos" style="margin-bottom: 15px; background: #1a1a1a; border: 1px solid #00ff88; padding: 10px 15px; border-radius: 8px; font-size: 14px; line-height: 1.5; display: none;">
