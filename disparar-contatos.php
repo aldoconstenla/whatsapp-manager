@@ -44,20 +44,18 @@ if (file_exists($jsonPath)) {
     </select>
   </div>
 
-  <div class="list-controls">
-    <select id="selectListaSalva" onchange="carregarListaSelecionada()">
-      <option value="">📂 Carregar lista salva...</option>
-    </select>
-    <button onclick="salvarComoLista()">💾 Salvar como Lista</button>
-  </div>
-
-
   <div class="top-controls">
     <div class="spreadsheet-container">
       <div id="dropzone" contenteditable="true" onpaste="handlePaste(event)">
         Clique aqui e cole os nomes e/ou números
       </div>
 
+      <div class="list-controls">
+        <select id="selectListaSalva" onchange="carregarListaSelecionada()">
+          <option value="">📂 Carregar lista salva...</option>
+        </select>
+      </div>
+      
       <table class="spreadsheet" id="planilha">
         <thead>
           <tr>
@@ -74,6 +72,7 @@ if (file_exists($jsonPath)) {
         <button onclick="abrirLightboxConfirmacao()">🚀 Disparar</button>
         <button onclick="limpar()">🗑️ Limpar Tudo</button>
         <button onclick="salvarSessaoAtual()">💾 Salvar Sessão Atual</button>
+        <button onclick="salvarComoLista()">💾 Salvar como Lista</button>
       </div>
       <div class="small">* Os dados serão salvos ao clicar em disparar ou no botão "Salvar Sessão Atual".</div>
     </div>
