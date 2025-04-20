@@ -47,20 +47,10 @@ if (file_exists($jsonPath)) {
   <div class="top-controls">
     <div class="spreadsheet-container">
 
-      <div class="list-controls">
-        <button onclick="abrirLightboxConfirmacao()">🚀 Disparar</button>
-        <button onclick="limpar()">🗑️ Limpar Tudo</button>
-        <button onclick="salvarComoLista()">💾 Salvar Lista</button>
-        <select id="selectListaSalva" onchange="carregarListaSelecionada()">
-          <option value="">📂 Carregar lista salva...</option>
-        </select>
-      </div>
-      <div id="mensagem-erro" style="color: #ff4d4d; font-weight: bold; margin-bottom: 10px; display: none;"></div>
-
       <div id="dropzone" contenteditable="true" onpaste="handlePaste(event)">
         Clique aqui e cole os nomes e/ou números
       </div>
-      
+
       <table class="spreadsheet" id="planilha">
         <thead>
           <tr>
@@ -117,6 +107,18 @@ if (file_exists($jsonPath)) {
         <button onclick="confirmarDisparo()" style="background: #00ff88; color: #000; padding: 10px 20px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer;">✅ Tenho certeza, pode disparar!</button>
         <button onclick="fecharLightbox()" style="background: #444; color: #fff; padding: 10px 20px; border-radius: 8px; border: 1px solid #00ff88; font-weight: bold; cursor: pointer;">🔍 Conferir detalhes</button>
       </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div id="mensagem-erro" style="color: #ff4d4d; font-weight: bold; margin-bottom: 10px; display: none;"></div>
+    <div class="footer-buttons">
+      <button onclick="abrirLightboxConfirmacao()">🚀 Disparar</button>
+      <button onclick="limpar()">🗑️ Limpar Tudo</button>
+      <button onclick="salvarComoLista()">💾 Salvar Lista</button>
+      <select id="selectListaSalva" onchange="carregarListaSelecionada()">
+        <option value="">📂 Carregar lista salva...</option>
+      </select>
     </div>
   </div>
 
