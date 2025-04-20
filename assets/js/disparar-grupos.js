@@ -421,24 +421,6 @@ async function mudarDescricaoGrupo() {
   }
 }
 
-async function extrairContatos() {
-  const id = document.getElementById('idGrupoExtrair').value;
-  const res = await fetch(WEBHOOKS.extrairContatos, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ 
-      idGrupo: id,
-      systemURL: WEBHOOKS.systemURL
-    })
-  });
-  const data = await res.json();
-  const tbody = document.querySelector('#tabelaContatos tbody');
-  tbody.innerHTML = '';
-  data.forEach(c => {
-    tbody.insertAdjacentHTML('beforeend', `<tr><td>${c}</td></tr>`);
-  });
-}
-
 let gruposCache = [];
 let gruposPorPagina = 10;
 let paginaAtual = 1;
@@ -846,6 +828,117 @@ function fecharContextMenu() {
   contextMenu._targetCell = null;
   contextMenu.dataset.id = '';
   contextMenu.dataset.nome = '';
+}
+
+async function extrairContatosGrupo() {
+  const idGrupo = contextMenu.dataset.id;
+  const [instancia, porta] = document.getElementById('instanciaSelect').value.split('|');
+
+  try {
+    const res = await fetch(WEBHOOKS.extrairContatos, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        idGrupo,
+        porta,
+        systemURL: WEBHOOKS.systemURL
+      })
+    });
+
+    const data = await res.json();
+
+    if (!data.status) throw new Error("Resposta inválida.");
+
+    // Exibe na lightbox
+    abrirLightboxContatos(data.contatos, data.quantidade || data.contatos.length);
+
+  } catch (err) {
+    alert("❌ Erro ao extrair contatos.");
+    console.error(err);
+  }
+
+  fecharContextMenu();
+}
+
+let contatosExtraidos = [];
+
+function abrirLightboxContatos(lista, quantidade) {
+  contatosExtraidos = lista;
+  document.getElementById('contatosQuantidade').innerText = `📱 ${quantidade} contato(s) extraído(s)`;
+  const container = document.getElementById('contatosTabela');
+
+  const porPagina = 15;
+  let pagina = 1;
+
+  function renderTabela() {
+    const inicio = (pagina - 1) * porPagina;
+    const fim = inicio + porPagina;
+    const contatosPagina = contatosExtraidos.slice(inicio, fim);
+
+    container.innerHTML = `
+      <table style="width:100%; border-collapse: collapse;">
+        <thead><tr><th style="text-align:left; border-bottom:1px solid #00ff88;">Telefone</th></tr></thead>
+        <tbody>
+          ${contatosPagina.map(c => `<tr><td style="padding:8px 0;">${c}</td></tr>`).join('')}
+        </tbody>
+      </table>
+      <div style="margin-top:10px; text-align:center;">
+        ${Array.from({ length: Math.ceil(contatosExtraidos.length / porPagina) }, (_, i) => 
+          `<button onclick="mudarPaginaContatos(${i + 1})" style="margin:0 4px; padding:4px 8px; border:1px solid #00ff88; background:${pagina === i + 1 ? '#00ff88' : '#1e1e1e'}; color:${pagina === i + 1 ? '#000' : '#00ff88'}; border-radius:4px;">${i + 1}</button>`
+        ).join('')}
+      </div>
+    `;
+  }
+
+  window.mudarPaginaContatos = function(novaPagina) {
+    pagina = novaPagina;
+    renderTabela();
+  }
+
+  renderTabela();
+  document.getElementById('lightbox-contatos').style.display = 'flex';
+}
+
+function fecharLightboxContatos() {
+  document.getElementById('lightbox-contatos').style.display = 'none';
+}
+
+function exportarContatosCSV() {
+  const csv = contatosExtraidos.join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'contatos_extraidos.csv';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+async function salvarContatosComoLista() {
+  const nomeLista = prompt("Dê um nome para a nova lista:");
+  if (!nomeLista || contatosExtraidos.length === 0) return;
+
+  const payload = {
+    nome: nomeLista,
+    contatos: contatosExtraidos.map(telefone => ({
+      nome: '',
+      telefone
+    }))
+  };
+
+  const res = await fetch('scripts/salvar-lista.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+
+  const data = await res.json();
+  if (data.ok) {
+    alert("✅ Lista salva com sucesso!");
+    fecharLightboxContatos();
+  } else {
+    alert("❌ Erro ao salvar lista.");
+  }
 }
 
 document.addEventListener('click', fecharContextMenu);
