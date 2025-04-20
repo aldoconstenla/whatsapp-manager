@@ -4,4 +4,6 @@ scripts/listas_de_envio/
 scripts/usuarios.json
 scripts/mensagem_ia.json
 scripts/instancias.json
-
+scripts/lista_grupos.json
+scripts/status.json
+scripts/status_grupos.json
