@@ -83,19 +83,6 @@ h2 {
   color: #fff;
 }
 
-#btnObterGrupos{
-  background-color: #00ff88;
-  color: #000;
-  font-size: 16px;
-  padding: 10px 22px;
-  border: none;
-  border-radius: 12px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 0 15px #00ff88aa;
-  margin-left: 10px;
-}
-
 .btn-Disparar-Grupos {
   background-color: #00ff88;
   color: #000;
