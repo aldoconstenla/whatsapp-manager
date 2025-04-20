@@ -185,3 +185,7 @@ select {
   color: #000;
   transform: scale(1.05);
 }
+
+#selectListaSalva {
+  margin-bottom: 13px;
+}
