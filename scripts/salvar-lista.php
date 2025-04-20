@@ -11,8 +11,9 @@ if (!$nome || !is_array($contatos)) {
 }
 
 $caminho = __DIR__ . "/../listas_de_envio/lista-{$nome}.json";
-file_put_contents($caminho, json_encode($contatos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-if (!file_put_contents($caminho, json_encode($contatos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+$salvo = file_put_contents($caminho, json_encode($contatos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+if ($salvo === false) {
   http_response_code(500);
   echo json_encode(['erro' => 'Falha ao salvar o arquivo.']);
   exit;
