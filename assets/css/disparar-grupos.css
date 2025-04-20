@@ -86,12 +86,26 @@ h2 {
 #btnObterGrupos{
   background-color: #00ff88;
   color: #000;
-  font-size: 18px;
-  padding: 16px 30px;
+  font-size: 16px;
+  padding: 10px 22px;
   border: none;
   border-radius: 12px;
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 0 15px #00ff88aa;
-  margin-top: 20px;
+  margin-left: 10px;
+}
+
+.btn-Disparar-Grupos {
+  background-color: #00ff88;
+  color: #000;
+  font-size: 18px;
+  padding: 14px 32px;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+  border: 2px solid #00ff88;
+}
+
+.btn-Disparar-Grupos:hover {
+  background-color: #00cc6f;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
 }

@@ -82,7 +82,7 @@ if (file_exists($jsonPath)) {
           <tbody></tbody>
         </table>
         <div class="controls">
-          <button onclick="abrirLightboxConfirmacao()">🚀 Disparar para Grupos</button>
+          <button class="btn-Disparar-Grupos" onclick="abrirLightboxConfirmacao()">🚀 Disparar para Grupos</button>
         </div>
 
       </div>
