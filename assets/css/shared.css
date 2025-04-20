@@ -73,6 +73,10 @@ table.spreadsheet,
   text-align: left;
 }
 
+.spreadsheet th {
+  padding:10px;
+}
+
 .spreadsheet td.delete-row {
   text-align: center;
 }
