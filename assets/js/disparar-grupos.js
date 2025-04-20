@@ -1003,15 +1003,33 @@ function abrirLightboxAgendamentos() {
       container.innerHTML = '';
       lista.forEach((item, index) => {
         const gruposHtml = item.grupos.map(g => `${g.nome} (${g.id})`).join('<br>');
+        // Formatador de data para DD-MM-AAAA HH:MM
+        const data = new Date(item.dataHora);
+        const dataFormatada = data.toLocaleString('pt-BR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        }).replace(',', '');
+
         container.innerHTML += `
-          <div style="border:1px solid #00ff88; border-radius:8px; padding:10px; margin:10px 0;">
-            <strong style="color:#00ff88;">${item.nome}</strong><br>
-            <small>📅 ${item.dataHora}</small><br><br>
-            ${gruposHtml}
+          <div style="border:1px solid #00ff88; border-radius:8px; padding:16px 20px; margin:16px 0; background:#1a1a1a; color:#eee;">
+            <div style="font-weight:bold; color:#00ff88; font-size:16px;">
+              📌 ${item.nome} | 📅 ${dataFormatada}
+            </div>
+            <div style="margin-top:10px;">
+              👥 ${gruposHtml}
+            </div>
+            <div style="margin-top:10px;">
+              📝 <strong>Mensagem:</strong><br>
+              <pre style="white-space: pre-wrap; font-family: inherit; color: #ccc; margin-top: 4px;">${item.mensagem}</pre>
+            </div>
             <div style="margin-top:10px; text-align:right;">
               <button onclick="excluirAgendamento(${index})" style="background:#ff4d4d; color:#fff; padding:6px 12px; border:none; border-radius:6px;">Excluir</button>
             </div>
           </div>`;
+
       });
       document.getElementById('lightbox-agendamentos').style.display = 'flex';
     });
