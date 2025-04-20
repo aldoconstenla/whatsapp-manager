@@ -185,3 +185,7 @@ select {
   color: #000;
   transform: scale(1.05);
 }
+
+#lightbox-confirmacao h2 {
+  margin-top: 0;
+}
