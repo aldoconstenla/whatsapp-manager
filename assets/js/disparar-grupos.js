@@ -995,10 +995,10 @@ function abrirLightboxAgendamentos() {
     .then(res => res.json())
     .then(lista => {
       const container = document.getElementById('listaAgendamentos');
-      const btnVerPassados = document.getElementById('btnVerAgendamentosPassados');
+      container.innerHTML = '';
+
       if (!Array.isArray(lista) || lista.length === 0) {
         container.innerHTML = "<p style='color:#ccc;'>Nenhum disparo agendado.</p>";
-        btnVerPassados.style.display = 'none';
         return;
       }
 
@@ -1007,9 +1007,15 @@ function abrirLightboxAgendamentos() {
       const passados = lista.filter(item => new Date(item.dataHora) <= agora);
 
       renderizarLista(futuros);
-      btnVerPassados.style.display = passados.length > 0 ? 'block' : 'none';
 
-      btnVerPassados.onclick = () => renderizarLista([...futuros, ...passados], true);
+      if (passados.length > 0) {
+        const btnVerPassados = document.createElement('button');
+        btnVerPassados.id = 'btnVerAgendamentosPassados';
+        btnVerPassados.textContent = '👁️ Ver disparos passados';
+        btnVerPassados.style = 'margin-top: 10px; padding: 10px 18px; background: #1e1e1e; border: 1px solid #00ff88; color: #00ff88; border-radius: 8px; cursor: pointer;';
+        btnVerPassados.onclick = () => renderizarLista([...futuros, ...passados], true);
+        container.appendChild(btnVerPassados);
+      }
 
       function renderizarLista(listaParaExibir, mostrarPassados = false) {
         container.innerHTML = '';
@@ -1018,8 +1024,8 @@ function abrirLightboxAgendamentos() {
         listaParaExibir.forEach((item, index) => {
           const dataFormatada = formatarDataHora(item.dataHora);
           const gruposHtml = item.grupos.map(g => `${g.nome} (${g.id})`).join('<br>');
-
           const isPassado = new Date(item.dataHora) <= agora;
+
           if (isPassado && !mostrarPassados) return;
 
           container.innerHTML += `
@@ -1035,6 +1041,15 @@ function abrirLightboxAgendamentos() {
               </div>
             </div>`;
         });
+
+        if (!mostrarPassados && passados.length > 0) {
+          const btnVerPassados = document.createElement('button');
+          btnVerPassados.id = 'btnVerAgendamentosPassados';
+          btnVerPassados.textContent = '👁️ Ver disparos passados';
+          btnVerPassados.style = 'margin-top: 10px; padding: 10px 18px; background: #1e1e1e; border: 1px solid #00ff88; color: #00ff88; border-radius: 8px; cursor: pointer;';
+          btnVerPassados.onclick = () => renderizarLista([...futuros, ...passados], true);
+          container.appendChild(btnVerPassados);
+        }
 
         document.getElementById('lightbox-agendamentos').style.display = 'flex';
       }
