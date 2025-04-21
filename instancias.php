@@ -46,7 +46,13 @@ if (file_exists($jsonPath)) {
             <?php foreach ($instancias as $inst) : ?>
                 <div class="instancia">
                     <div class="instancia-header">
-                        <span class="instancia-name"><?= htmlspecialchars($inst['nome']) ?></span>
+                        <div class="instancia-nome-container">
+                          <span class="instancia-name"><?= htmlspecialchars($inst['nome']) ?></span>
+                          <small style="display: block; color: #aaa; font-size: 12px;">
+                            Porta: <?= htmlspecialchars($inst['porta']) ?>
+                            <span class="info-icon" onclick="mostrarEndpoints('<?= $inst['porta'] ?>')">ℹ️</span>
+                          </small>
+                        </div>
                         <form class="delete-form" data-nome="<?= htmlspecialchars($inst['nome']) ?>" data-porta="<?= htmlspecialchars($inst['porta']) ?>">
                             <input type="hidden" name="nome" value="<?= htmlspecialchars($inst['nome']) ?>">
                             <input type="hidden" name="porta" value="<?= htmlspecialchars($inst['porta']) ?>">
