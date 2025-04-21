@@ -125,4 +125,14 @@ function mostrarEndpoints(porta) {
     `;
 
     document.body.appendChild(box);
+    // Fecha se clicar fora da caixa interna
+    const overlay = box.querySelector('[data-overlay-endpoints]');
+    const caixaInterna = overlay.querySelector('div'); // primeira div interna é a caixa
+
+    overlay.addEventListener('click', (e) => {
+      if (!caixaInterna.contains(e.target)) {
+        overlay.remove();
+      }
+    });
+
 }
