@@ -50,7 +50,7 @@ if (file_exists($jsonPath)) {
                           <span class="instancia-name"><?= htmlspecialchars($inst['nome']) ?></span>
                           <small style="display: block; color: #aaa; font-size: 12px;">
                             Porta: <?= htmlspecialchars($inst['porta']) ?>
-                            <span class="info-icon" onclick="mostrarEndpoints('<?= $inst['porta'] ?>')">ℹ️</span>
+                            <span class="info-icon" onclick="mostrarEndpoints('<?= $inst['porta'] ?>')" style="cursor:pointer">ℹ️</span>
                           </small>
                         </div>
                         <form class="delete-form" data-nome="<?= htmlspecialchars($inst['nome']) ?>" data-porta="<?= htmlspecialchars($inst['porta']) ?>">
