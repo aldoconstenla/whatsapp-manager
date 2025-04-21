@@ -43,7 +43,7 @@ function toggleQRCode(porta, el) {
         iframe.style.display = 'none';
         el.textContent = '📷 Ver QR Code';
     } else {
-        iframe.src = `http://5.189.148.139:${porta}`;
+        iframe.src = `https://${porta}.bravosdigital.com.br/`;
         iframe.style.display = 'block';
         el.textContent = '❌ Ocultar QR Code';
     }
