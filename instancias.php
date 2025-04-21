@@ -20,7 +20,7 @@ if (file_exists($jsonPath)) {
 <body>
 
 <header>
-    <h1>Jutsu WhatsApp Manager</h1>
+    <h1>WhatsApp Manager</h1>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <div class="menu">
         <a href="instancias.php" onclick="closeMenu()">Instâncias</a>
