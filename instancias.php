@@ -64,7 +64,7 @@ if (file_exists($jsonPath)) {
     </div>
 </div>
 
-<script src="assets/js/instancias.js"></script>
+<script src="assets/js/instancias.js?v=<?= time() ?>"></script>
 
 </body>
 </html>
