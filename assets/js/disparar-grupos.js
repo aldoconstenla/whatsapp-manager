@@ -995,41 +995,49 @@ function abrirLightboxAgendamentos() {
     .then(res => res.json())
     .then(lista => {
       const container = document.getElementById('listaAgendamentos');
+      const btnVerPassados = document.getElementById('btnVerAgendamentosPassados');
       if (!Array.isArray(lista) || lista.length === 0) {
         container.innerHTML = "<p style='color:#ccc;'>Nenhum disparo agendado.</p>";
+        btnVerPassados.style.display = 'none';
         return;
       }
 
-      lista.sort((a, b) => new Date(a.dataHora) - new Date(b.dataHora));
+      const agora = new Date();
+      const futuros = lista.filter(item => new Date(item.dataHora) > agora);
+      const passados = lista.filter(item => new Date(item.dataHora) <= agora);
 
-      container.innerHTML = '';
-      lista.forEach((item, index) => {
-        const gruposHtml = item.grupos.map(g => `${g.nome} (${g.id})`).join('<br>');
-        // Formatador de data para DD-MM-AAAA HH:MM
-        const data = new Date(item.dataHora);
-        const dataFormatada = data.toLocaleString('pt-BR', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
-        }).replace(',', '');
+      renderizarLista(futuros);
+      btnVerPassados.style.display = passados.length > 0 ? 'block' : 'none';
 
-        container.innerHTML += `
-          <div style="border:1px solid #00ff88; border-radius:8px; padding:10px; margin:10px 0; position:relative;">
-            <div style="position:absolute; top:10px; right:10px; font-size:12px; color:#aaa;">
-              🔧 ${item.instancia}
-            </div>
-            <strong style="color:#00ff88;">📌 ${item.nome}</strong> | <span style="color:#00c8ff;">📅 ${formatarDataHora(item.dataHora)}</span><br>
-            <span style="color:#ccc;">👥 ${item.grupos.map(g => `${g.nome} (${g.id})`).join('<br>')}</span><br><br>
-            <span style="color:#fff;">📄 <strong>Mensagem:</strong><br>${item.mensagem}</span>
-            <div style="margin-top:10px; text-align:right;">
-              <button onclick="excluirAgendamento(${index})" style="background:#ff4d4d; color:#fff; padding:6px 12px; border:none; border-radius:6px;">Excluir</button>
-            </div>
-          </div>`;
+      btnVerPassados.onclick = () => renderizarLista([...futuros, ...passados], true);
 
-      });
-      document.getElementById('lightbox-agendamentos').style.display = 'flex';
+      function renderizarLista(listaParaExibir, mostrarPassados = false) {
+        container.innerHTML = '';
+        listaParaExibir.sort((a, b) => new Date(a.dataHora) - new Date(b.dataHora));
+
+        listaParaExibir.forEach((item, index) => {
+          const dataFormatada = formatarDataHora(item.dataHora);
+          const gruposHtml = item.grupos.map(g => `${g.nome} (${g.id})`).join('<br>');
+
+          const isPassado = new Date(item.dataHora) <= agora;
+          if (isPassado && !mostrarPassados) return;
+
+          container.innerHTML += `
+            <div style="border:1px solid #00ff88; border-radius:8px; padding:10px; margin:10px 0; position:relative;">
+              <div style="position:absolute; top:10px; right:10px; font-size:12px; color:#aaa;">
+                🔧 ${item.instancia}
+              </div>
+              <strong style="color:#00ff88;">📌 ${item.nome}</strong> | <span style="color:#00c8ff;">📅 ${dataFormatada}</span><br>
+              <span style="color:#ccc;">👥 ${gruposHtml}</span><br><br>
+              <span style="color:#fff;">📄 <strong>Mensagem:</strong><br>${item.mensagem}</span>
+              <div style="margin-top:10px; text-align:right;">
+                <button onclick="excluirAgendamento(${index})" style="background:#ff4d4d; color:#fff; padding:6px 12px; border:none; border-radius:6px;">Excluir</button>
+              </div>
+            </div>`;
+        });
+
+        document.getElementById('lightbox-agendamentos').style.display = 'flex';
+      }
     });
 }
 

@@ -596,27 +596,46 @@ function abrirLightboxAgendamentosContatos() {
 
       lista.sort((a, b) => new Date(a.dataHora) - new Date(b.dataHora));
 
-      container.innerHTML = '';
-      lista.forEach((item, index) => {
-        const contatosHtml = item.contatos.map(c => `${c.nome || 'Sem nome'} (${c.telefone})`).join('<br>');
-        const dataFormatada = new Date(item.dataHora).toLocaleString('pt-BR', {
-          day: '2-digit', month: '2-digit', year: 'numeric',
-          hour: '2-digit', minute: '2-digit'
-        }).replace(',', '');
+      const agora = new Date();
+      const agendamentosFuturos = lista.filter(item => new Date(item.dataHora) >= agora);
+      const agendamentosPassados = lista.filter(item => new Date(item.dataHora) < agora);
 
-        container.innerHTML += `
-          <div style="border:1px solid #00ff88; border-radius:8px; padding:10px; margin:10px 0; position:relative;">
-            <div style="position:absolute; top:10px; right:10px; font-size:12px; color:#aaa;">
-              🔧 ${item.instancia}
-            </div>
-            <strong style="color:#00ff88;">📌 ${item.nome}</strong> | <span style="color:#00c8ff;">📅 ${dataFormatada}</span><br>
-            <span style="color:#ccc;">📱 ${contatosHtml}</span><br><br>
-            <span style="color:#fff;">📄 <strong>Mensagem:</strong><br>${item.mensagem}</span>
-            <div style="margin-top:10px; text-align:right;">
-              <button onclick="excluirAgendamentoContatos(${index})" style="background:#ff4d4d; color:#fff; padding:6px 12px; border:none; border-radius:6px;">Excluir</button>
-            </div>
-          </div>`;
-      });
+      container.innerHTML = '';
+
+      function renderAgendamentos(listaParaExibir) {
+        container.innerHTML = '';
+        listaParaExibir.forEach((item, index) => {
+          const contatosHtml = item.contatos.map(c => `${c.nome || 'Sem nome'} (${c.telefone})`).join('<br>');
+          const dataFormatada = new Date(item.dataHora).toLocaleString('pt-BR', {
+            day: '2-digit', month: '2-digit', year: 'numeric',
+            hour: '2-digit', minute: '2-digit'
+          }).replace(',', '');
+
+          container.innerHTML += `
+            <div style="border:1px solid #00ff88; border-radius:8px; padding:10px; margin:10px 0; position:relative;">
+              <div style="position:absolute; top:10px; right:10px; font-size:12px; color:#aaa;">
+                🔧 ${item.instancia}
+              </div>
+              <strong style="color:#00ff88;">📌 ${item.nome}</strong> | <span style="color:#00c8ff;">📅 ${dataFormatada}</span><br>
+              <span style="color:#ccc;">📱 ${contatosHtml}</span><br><br>
+              <span style="color:#fff;">📄 <strong>Mensagem:</strong><br>${item.mensagem}</span>
+              <div style="margin-top:10px; text-align:right;">
+                <button onclick="excluirAgendamentoContatos(${index})" style="background:#ff4d4d; color:#fff; padding:6px 12px; border:none; border-radius:6px;">Excluir</button>
+              </div>
+            </div>`;
+        });
+      }
+
+      renderAgendamentos(agendamentosFuturos);
+
+      // Botão para mostrar agendamentos passados
+      if (agendamentosPassados.length > 0) {
+        const btn = document.createElement('button');
+        btn.textContent = '📂 Ver disparos passados';
+        btn.style = 'margin-top: 15px; background:#444; color:#fff; padding:8px 16px; border:none; border-radius:6px; cursor:pointer;';
+        btn.onclick = () => renderAgendamentos(agendamentosPassados);
+        container.appendChild(btn);
+      }
 
       document.getElementById('lightbox-ver-agendamentos').style.display = 'flex';
     });
