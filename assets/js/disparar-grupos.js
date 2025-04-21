@@ -1008,15 +1008,6 @@ function abrirLightboxAgendamentos() {
 
       renderizarLista(futuros);
 
-      if (passados.length > 0) {
-        const btnVerPassados = document.createElement('button');
-        btnVerPassados.id = 'btnVerAgendamentosPassados';
-        btnVerPassados.textContent = '👁️ Ver disparos passados';
-        btnVerPassados.style = 'margin-top: 10px; padding: 10px 18px; background: #1e1e1e; border: 1px solid #00ff88; color: #00ff88; border-radius: 8px; cursor: pointer;';
-        btnVerPassados.onclick = () => renderizarLista([...futuros, ...passados], true);
-        container.appendChild(btnVerPassados);
-      }
-
       function renderizarLista(listaParaExibir, mostrarPassados = false) {
         container.innerHTML = '';
         listaParaExibir.sort((a, b) => new Date(a.dataHora) - new Date(b.dataHora));
