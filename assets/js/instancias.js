@@ -103,16 +103,18 @@ function mostrarEndpoints(porta) {
     ).join('');
 
     const box = document.createElement('div');
+    box.setAttribute('data-overlay-endpoints', ''); // <- marcador para facilitar remoção
     box.innerHTML = `
         <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;
                     background: rgba(0,0,0,0.7); z-index: 9999; display: flex; 
-                    justify-content: center; align-items: center;">
+                    justify-content: center; align-items: center;"
+             data-overlay-endpoints>
             <div style="background: #1e1e1e; color: #fff; padding: 20px; border-radius: 10px; 
                         max-width: 600px; max-height: 80vh; overflow-y: auto;">
                 <h3 style="margin-top: 0;">📘 Endpoints da Instância</h3>
                 ${lista}
                 <div style="text-align: right;">
-                    <button onclick="this.closest('div').parentNode.remove()" 
+                    <button onclick="this.closest('[data-overlay-endpoints]').remove()" 
                             style="margin-top: 10px; padding: 6px 14px; background: #00ff88; 
                                    border: none; color: #000; border-radius: 6px; cursor: pointer;">
                         Fechar
@@ -121,5 +123,6 @@ function mostrarEndpoints(porta) {
             </div>
         </div>
     `;
+
     document.body.appendChild(box);
 }
