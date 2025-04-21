@@ -27,6 +27,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload({ debug: true }));
 app.use("/", express.static(__dirname + "/"));
 
+// Libera exibição via iframe (substitui X-Frame-Options e CSP)
+app.use((req, res, next) => {
+  res.setHeader('X-Frame-Options', 'ALLOWALL'); // permite iframe de qualquer origem
+  res.setHeader('Content-Security-Policy', "frame-ancestors *"); // CSP moderna
+  next();
+});
+
 // ROTA INICIAL
 app.get('/', (req, res) => {
   res.sendFile('index.html', { root: __dirname });
