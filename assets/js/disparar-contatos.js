@@ -661,6 +661,16 @@ function fecharLightboxAgendamentosContatos() {
 }
 
 function abrirLightboxAgendarContatos() {
+  const agora = new Date();
+  const year = agora.getFullYear();
+  const month = String(agora.getMonth() + 1).padStart(2, '0');
+  const day = String(agora.getDate()).padStart(2, '0');
+  const hour = String(agora.getHours()).padStart(2, '0');
+  const minute = String(agora.getMinutes()).padStart(2, '0');
+
+  const localDateTime = `${year}-${month}-${day}T${hour}:${minute}`;
+  document.getElementById('dataHoraAgendamento').value = localDateTime;
+
   document.getElementById('lightbox-agendar-contato').style.display = 'flex';
 }
 
