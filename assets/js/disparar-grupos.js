@@ -942,8 +942,15 @@ async function salvarContatosComoLista() {
 }
 
 function abrirLightboxAgendamento() {
+  const agora = new Date();
+  agora.setSeconds(0, 0); // Remove segundos/milissegundos
+
+  const localDateTime = agora.toISOString().slice(0, 16); // yyyy-MM-ddTHH:mm
+  document.getElementById('dataHoraAgendamento').value = localDateTime;
+
   document.getElementById('lightbox-agendar').style.display = 'flex';
 }
+
 function fecharLightboxAgendar() {
   document.getElementById('lightbox-agendar').style.display = 'none';
 }
