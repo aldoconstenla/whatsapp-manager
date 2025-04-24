@@ -943,9 +943,13 @@ async function salvarContatosComoLista() {
 
 function abrirLightboxAgendamento() {
   const agora = new Date();
-  agora.setSeconds(0, 0); // Remove segundos/milissegundos
+  const year = agora.getFullYear();
+  const month = String(agora.getMonth() + 1).padStart(2, '0');
+  const day = String(agora.getDate()).padStart(2, '0');
+  const hour = String(agora.getHours()).padStart(2, '0');
+  const minute = String(agora.getMinutes()).padStart(2, '0');
 
-  const localDateTime = agora.toISOString().slice(0, 16); // yyyy-MM-ddTHH:mm
+  const localDateTime = `${year}-${month}-${day}T${hour}:${minute}`;
   document.getElementById('dataHoraAgendamento').value = localDateTime;
 
   document.getElementById('lightbox-agendar').style.display = 'flex';
