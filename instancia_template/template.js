@@ -335,17 +335,15 @@ app.post('/send-message', [
     });
   }
 
-  // 🔥 NOVO TRECHO: Se o número for do Brasil (começar com 55), aplica a correção do 9
+  // 🔥 NOVO TRECHO: Se for Brasil (começar com 55), corta e reconstrói corretamente
   if (number.startsWith('55')) {
-    const ddd = number.substring(2, 4);
-    const restante = number.substring(4);
+    const ddi = '55';
+    const numberDDD = number.substring(2, 4); // Pega o DDD (ex: 11, 61, etc)
+    const numberUser = number.slice(-8);      // Pega os 8 últimos dígitos do número
 
-    // Se o DDD for menor ou igual a 30, e o número restante tiver 8 dígitos apenas (sem o 9)
-    if (ddd <= 30) {
-      if (restante.length === 8) {
-        number = `55${ddd}9${restante}`;
-      }
-    }
+    number = (parseInt(numberDDD) <= 30)
+      ? `${ddi}${numberDDD}9${numberUser}`
+      : `${ddi}${numberDDD}${numberUser}`;
   }
 
   // Formato final do número para envio via WhatsApp Web.js
@@ -366,7 +364,6 @@ app.post('/send-message', [
     });
   }
 });
-
 
 // EVENTO DE RECEBIMENTO DE MENSAGEM
 client.on('message', async msg => {
