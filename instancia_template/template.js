@@ -335,6 +335,19 @@ app.post('/send-message', [
     });
   }
 
+  // 🔥 NOVO TRECHO: Se o número for do Brasil (começar com 55), aplica a correção do 9
+  if (number.startsWith('55')) {
+    const ddd = number.substring(2, 4);
+    const restante = number.substring(4);
+
+    // Se o DDD for menor ou igual a 30, e o número restante tiver 8 dígitos apenas (sem o 9)
+    if (ddd <= 30) {
+      if (restante.length === 8) {
+        number = `55${ddd}9${restante}`;
+      }
+    }
+  }
+
   // Formato final do número para envio via WhatsApp Web.js
   const phoneNumber = `${number}@c.us`;
 
@@ -353,6 +366,7 @@ app.post('/send-message', [
     });
   }
 });
+
 
 // EVENTO DE RECEBIMENTO DE MENSAGEM
 client.on('message', async msg => {
