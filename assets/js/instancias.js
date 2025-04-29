@@ -91,13 +91,16 @@ document.querySelectorAll('.delete-form').forEach(form => {
 });
 
 function mostrarEndpoints(porta) {
+    // Nome da instância vem do porta atual carregada
+    const nomeInstancia = porta; // ou ajuste se quiser um nome mais bonito vindo do servidor futuramente
+
     const endpoints = [
         { nome: "Enviar mensagem particular (POST)", url: `/send-message`, body: "number, message" },
         { nome: "Enviar mensagem grupo (POST)", url: `/send-message-group`, body: "groupId, message" },
         { nome: "Mudar nome grupo (POST)", url: `/mudar-nome-grupo`, body: "groupId, newName" },
         { nome: "Mudar descrição grupo (POST)", url: `/mudar-descricao-grupo`, body: "groupId, newDescription" },
         { nome: "Extrair contatos grupo (POST)", url: `/extrair-contatos-grupo`, body: "groupId" },
-        { nome: "Listar ID de grupos (GET)", url: `/listar-grupos?nome=NOME_DA_INSTANCIA`, body: "" }
+        { nome: "Listar ID de grupos (GET)", url: `/listar-grupos?nome=${nomeInstancia}`, body: "" }
     ];
 
     let lista = endpoints.map(ep =>
@@ -110,7 +113,7 @@ function mostrarEndpoints(porta) {
     box.setAttribute('data-overlay-endpoints', '');
     box.innerHTML = `
         <div>
-            <h3>📘 Endpoints da Instância</h3>
+            <h3>📘 Endpoints da Instância <code data-copy="${nomeInstancia}" style="font-size:16px;">${nomeInstancia}</code></h3>
             ${lista}
             <div style="text-align: right;">
                 <button onclick="this.closest('[data-overlay-endpoints]').remove()">Fechar</button>
@@ -120,22 +123,29 @@ function mostrarEndpoints(porta) {
 
     document.body.appendChild(box);
 
-    // Evento de copiar para todos <code>
+    // Evento copiar URLs dos endpoints
     document.querySelectorAll('[data-url]').forEach(code => {
         code.addEventListener('click', function() {
             const texto = this.getAttribute('data-url');
             navigator.clipboard.writeText(texto).then(() => {
-                this.style.background = '#00cc6f';
-                this.style.color = '#000';
-                setTimeout(() => {
-                    this.style.background = '#111';
-                    this.style.color = '#00ff88';
-                }, 1000);
+                this.classList.add('copied');
+                setTimeout(() => this.classList.remove('copied'), 1000);
             });
         });
     });
 
-    // Fechar clicando fora
+    // Evento copiar Nome da Instância
+    document.querySelectorAll('[data-copy]').forEach(code => {
+        code.addEventListener('click', function() {
+            const texto = this.getAttribute('data-copy');
+            navigator.clipboard.writeText(texto).then(() => {
+                this.classList.add('copied');
+                setTimeout(() => this.classList.remove('copied'), 1000);
+            });
+        });
+    });
+
+    // Fecha lightbox ao clicar fora
     const overlay = box.querySelector('[data-overlay-endpoints]');
     const caixaInterna = overlay.querySelector('div');
     overlay.addEventListener('click', (e) => {

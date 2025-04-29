@@ -275,3 +275,44 @@ iframe {
 [data-overlay-endpoints] button:hover {
   background: #00e676;
 }
+
+[data-overlay-endpoints] > div {
+  background: #1e1e1e;
+  color: #00ff88;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 750px; /* <- AUMENTADO */
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 0 25px #00ff8844;
+  animation: fadeIn 0.5s ease;
+}
+
+/* Código copiado feedback */
+[data-overlay-endpoints] code {
+  display: inline-block;
+  margin-top: 5px;
+  background: #111;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+[data-overlay-endpoints] code:hover {
+  background: #00ff88;
+  color: #000;
+  transform: scale(1.05);
+}
+
+[data-overlay-endpoints] code.copied {
+  background: #00cc6f !important;
+  color: #000 !important;
+  animation: copiedPulse 0.8s ease;
+}
+
+@keyframes copiedPulse {
+  0% { transform: scale(1.05); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1.05); }
+}
