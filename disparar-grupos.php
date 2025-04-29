@@ -40,18 +40,21 @@ if (file_exists($jsonPath)) {
     </div>
   </header>
 
-  <h1>📣 Disparar para Grupos</h1>
-  <!-- Seletor de Instância -->
-  <div class="instancia-container">
-    <label for="instanciaSelect">Instância:</label>
-    <select id="instanciaSelect">
-      <?php foreach ($instancias as $inst): ?>
-        <option value="<?= htmlspecialchars($inst['nome']) ?>|<?= htmlspecialchars($inst['porta']) ?>">
-          <?= htmlspecialchars($inst['nome']) ?>
-        </option>
-      <?php endforeach; ?>
-    </select>
+  <div class="top-bar">
+    <h1>📣 Disparar para Grupos</h1>
+    <div class="top-bar-controls">
+      <label for="instanciaSelect">Instância:</label>
+      <select id="instanciaSelect">
+        <?php foreach ($instancias as $inst): ?>
+          <option value="<?= htmlspecialchars($inst['nome']) ?>|<?= htmlspecialchars($inst['porta']) ?>">
+            <?= htmlspecialchars($inst['nome']) ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
+      <!-- opcional: <button onclick="obterGrupos()">🔍 Obter Grupos</button> -->
+    </div>
   </div>
+
 
   <!-- Seção 1: Obter IDs dos grupos -->
   <div class="section">
