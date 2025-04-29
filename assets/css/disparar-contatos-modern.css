@@ -237,3 +237,38 @@ body {
 #lightbox-ver-agendamentos.active {
   display: flex;
 }
+
+.topo-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.topo-flex h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #00ff88;
+}
+
+.topo-flex .instance-select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topo-flex .instance-select label {
+  color: #00ff88;
+  font-weight: bold;
+}
+
+.topo-flex .instance-select select {
+  background: #2a2a2a;
+  border: 2px solid #00ff88;
+  border-radius: 8px;
+  padding: 10px;
+  color: #00ff88;
+  font-size: 16px;
+}

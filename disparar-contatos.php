@@ -33,16 +33,20 @@ if (file_exists($jsonPath)) {
       <a href="disparar-grupos.php" onclick="closeMenu()">Disparar para Grupos</a>
     </div>
   </header>
-  <h1>📤 Disparar para Contatos</h1>
-  <div class="instance-select">
-    <label for="instancia">Instância:</label>
-    <select id="instancia">
-      <?php foreach ($instancias as $inst) : ?>
-        <option value="<?= htmlspecialchars($inst['nome']) ?>|<?= htmlspecialchars($inst['porta']) ?>">
-          <?= htmlspecialchars($inst['nome']) ?>
-        </option>
-      <?php endforeach; ?>
-    </select>
+  
+  <div class="topo-flex">
+    <h1>📤 Disparar para Contatos</h1>
+
+    <div class="instance-select">
+      <label for="instancia">Instância:</label>
+      <select id="instancia">
+        <?php foreach ($instancias as $inst) : ?>
+          <option value="<?= htmlspecialchars($inst['nome']) ?>|<?= htmlspecialchars($inst['porta']) ?>">
+            <?= htmlspecialchars($inst['nome']) ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
+    </div>
   </div>
 
   <div class="top-controls">
