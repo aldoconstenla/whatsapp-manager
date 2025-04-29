@@ -20,7 +20,7 @@ if (file_exists($jsonPath)) {
 <body>
 
 <header>
-    <h1>WhatsApp Manager</h1>
+    <img src="assets/img/jazap-logo.webp" style="width:145px">
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <div class="menu">
         <a href="disparar-contatos.php" onclick="closeMenu()">Disparar para Contatos</a>
