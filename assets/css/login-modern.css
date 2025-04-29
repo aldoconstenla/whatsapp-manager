@@ -1,0 +1,117 @@
+/* Fundo Neon Animado */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0a0a0a, #0f0f0f);
+  background-size: 400% 400%;
+  animation: neonBackground 15s ease infinite;
+  font-family: 'Courier New', monospace;
+  color: #00ff88;
+}
+
+@keyframes neonBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Container principal */
+.login-container {
+  background: rgba(30, 30, 30, 0.95);
+  border: 2px solid #00ff88;
+  border-radius: 15px;
+  padding: 50px 40px;
+  box-shadow: 0 0 25px #00ff8877, 0 0 50px #00ff8844;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  animation: fadeIn 1.2s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Título principal */
+h1 {
+  margin: 0 0 20px 0;
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+h1 .sub {
+  font-size: 16px;
+  color: #00ff8866;
+  display: block;
+  margin-top: 8px;
+}
+
+/* Estilo dos Inputs */
+label {
+  text-align: left;
+  display: block;
+  margin: 15px 0 5px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  background: #111;
+  border: 2px solid #00ff88;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #00ff88;
+  margin-bottom: 15px;
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  background: #0d0d0d;
+  box-shadow: 0 0 12px #00ff88cc;
+}
+
+/* Botão */
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  background: #00ff88;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  background: #00e676;
+  box-shadow: 0 0 15px #00ff88aa, 0 0 20px #00ff8866;
+}
+
+/* Mensagem de erro */
+.erro {
+  color: #ff4d4d;
+  background: rgba(41, 0, 0, 0.8);
+  padding: 12px;
+  border: 1px solid #ff4d4d;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* Formulário */
+form {
+  width: 100%;
+}
+
+form * {
+  box-sizing: border-box;
+}
