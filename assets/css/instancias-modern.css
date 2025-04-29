@@ -202,10 +202,6 @@ iframe {
   backdrop-filter: blur(8px);
 }
 
-.menu a {
-  font-weight: bold;
-}
-
 /* Lightbox de Endpoints */
 [data-overlay-endpoints] {
   position: fixed;
