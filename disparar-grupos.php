@@ -41,7 +41,7 @@ if (file_exists($jsonPath)) {
 
   <h1>📣 Disparar para Grupos</h1>
   <!-- Seletor de Instância -->
-  <div>
+  <div class="instancia-container">
     <label for="instanciaSelect">Instância:</label>
     <select id="instanciaSelect">
       <?php foreach ($instancias as $inst): ?>
