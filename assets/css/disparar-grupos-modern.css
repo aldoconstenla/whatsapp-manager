@@ -1,9 +1,8 @@
-/* Fundo animado suave */
 body {
   background: linear-gradient(135deg, #0a0a0a, #0f0f0f);
   background-size: 400% 400%;
   animation: neonBackground 15s ease infinite;
-  padding-bottom: 140px; /* espaço para o rodapé */
+  padding-bottom: 140px;
   margin: 0;
 }
 
@@ -13,44 +12,47 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* Estilo do header */
 header {
   background: #1a1a1a;
   border-bottom: 2px solid #00ff88;
   padding: 5px 40px;
 }
 
-/* Título principal */
 h1 {
-  margin: 0 auto 30px auto;
+  margin: 0;
   font-size: 30px;
   color: #00ff88;
-  text-align: center;
 }
 
-/* Seletor de instância - Centralizado */
-#instanciaSelect, label[for="instanciaSelect"] {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-div:has(#instanciaSelect) {
+.instancia-barra {
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px 40px 10px;
 }
 
-#instanciaSelect {
-  margin-left: 10px;
-  background: #2c2c2c;
+.instancia-controle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.instancia-controle label {
   color: #00ff88;
-  border: 1px solid #00ff88;
-  padding: 10px;
-  border-radius: 8px;
+  font-weight: bold;
 }
 
-/* Seções com visual sólido */
+.instancia-controle select {
+  background: #2a2a2a;
+  border: 2px solid #00ff88;
+  border-radius: 8px;
+  padding: 10px;
+  color: #00ff88;
+  font-size: 16px;
+}
+
 .section {
   margin-top: 40px;
   background: #1e1e1e;
@@ -59,7 +61,6 @@ div:has(#instanciaSelect) {
   box-shadow: 0 0 15px #00ff8822;
 }
 
-/* Busca de grupo */
 #buscaGrupo {
   padding: 12px;
   font-size: 16px;
@@ -70,7 +71,6 @@ div:has(#instanciaSelect) {
   margin-bottom: 20px;
 }
 
-/* Instruções */
 #instrucoesGrupos {
   background: #121212;
   border: 1px solid #00ff88;
@@ -81,7 +81,6 @@ div:has(#instanciaSelect) {
   margin-bottom: 20px;
 }
 
-/* Row estilo - Caixa à direita respeitando */
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -103,7 +102,6 @@ div:has(#instanciaSelect) {
   flex-direction: column;
 }
 
-/* Tabelas */
 .spreadsheet th,
 .spreadsheet td {
   border: 1px solid #444;
@@ -119,7 +117,6 @@ div:has(#instanciaSelect) {
   color: #f1f1f1;
 }
 
-/* Botões de formatação */
 .format-buttons .format-btn {
   background-color: #1e1e1e;
   border: 1px solid #00ff88;
@@ -131,61 +128,10 @@ div:has(#instanciaSelect) {
   color: #000;
 }
 
-/* --- Lightbox --- */
-/* Estilo correto para overlay no mundo inteiro */
-#lightbox-confirmacao,
-#lightbox-descricao,
-#lightbox-contatos,
-#lightbox-mensagens,
-#lightbox-agendar,
-#lightbox-agendamentos,
-.lightbox {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
-  z-index: 9999;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+textarea {
+  min-height: 240px;
 }
 
-.lightbox-inner {
-  background: #1e1e1e;
-  border: 2px solid #00ff88;
-  padding: 30px;
-  border-radius: 12px;
-  color: #fff;
-  max-width: 600px;
-  width: 100%;
-}
-
-/* Inputs nos lightboxes */
-.lightbox input, .lightbox textarea {
-  background: #2a2a2a;
-  color: #fff;
-  border: 1px solid #00ff88;
-  border-radius: 8px;
-  padding: 12px;
-  width: 100%;
-  margin-top: 10px;
-}
-
-/* Botões nos lightboxes */
-.lightbox button {
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.lightbox button:hover {
-  transform: scale(1.05);
-}
-
-/* Rodapé fixo */
 .footer-bar {
   position: fixed;
   bottom: 0;
@@ -212,7 +158,6 @@ div:has(#instanciaSelect) {
   padding: 12px 22px;
 }
 
-/* Botão Disparar */
 .footer-buttons button:nth-child(1) {
   background-color: #00ff88;
   color: #000;
@@ -226,7 +171,6 @@ div:has(#instanciaSelect) {
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
 }
 
-/* Botões secundários */
 .footer-buttons button:nth-child(n+2) {
   background-color: #1e1e1e;
   color: #00ff88;
@@ -238,111 +182,47 @@ div:has(#instanciaSelect) {
   color: #000;
 }
 
-.instancia-container {
-  display: flex;
-  justify-content: center;
+.lightbox {
+  background: rgba(0, 0, 0, 0.85);
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
 }
 
-.instancia-container label {
-  color: #00ff88;
-  font-weight: bold;
-  margin-right: -13px;
-}
-
-.instancia-container select {
-  background: #2a2a2a;
+.lightbox-inner {
+  background: #1e1e1e;
   border: 2px solid #00ff88;
-  border-radius: 8px;
-  padding: 10px;
-  color: #00ff88;
-  font-size: 16px;
-  margin-left: 10px;
+  padding: 30px;
+  border-radius: 12px;
+  color: #fff;
+  max-width: 600px;
+  width: 100%;
 }
 
-.instancia-container button {
-  background-color: #1e1e1e;
-  color: #00ff88;
+.lightbox input,
+.lightbox textarea {
+  background: #2a2a2a;
   border: 1px solid #00ff88;
-  padding: 10px 20px;
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.lightbox button {
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
-.instancia-container button:hover {
-  background-color: #00ff88;
-  color: #000;
-}
-
-.instancia-barra {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 25px 40px 10px 40px;
-  flex-wrap: wrap;
-}
-
-.instancia-barra h1 {
-  margin: 0;
-  font-size: 30px;
-  color: #00ff88;
-}
-
-.instancia-controle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.instancia-controle label {
-  color: #00ff88;
-  font-weight: bold;
-}
-
-.instancia-controle select {
-  background: #2a2a2a;
-  border: 2px solid #00ff88;
-  border-radius: 8px;
-  padding: 10px;
-  color: #00ff88;
-  font-size: 16px;
-}
-
-.instancia-barra {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 25px 40px 10px 40px;
-  flex-wrap: wrap;
-}
-
-.instancia-barra h1 {
-  margin: 0;
-  font-size: 30px;
-  color: #00ff88;
-}
-
-.instancia-controle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.instancia-controle label {
-  color: #00ff88;
-  font-weight: bold;
-}
-
-.instancia-controle select {
-  background: #2a2a2a;
-  border: 2px solid #00ff88;
-  border-radius: 8px;
-  padding: 10px;
-  color: #00ff88;
-  font-size: 16px;
+.lightbox button:hover {
+  transform: scale(1.05);
 }
