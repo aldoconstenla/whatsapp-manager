@@ -237,3 +237,41 @@ div:has(#instanciaSelect) {
   background-color: #00ff88;
   color: #000;
 }
+
+.instancia-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.instancia-container label {
+  color: #00ff88;
+  font-weight: bold;
+}
+
+.instancia-container select {
+  background: #2c2c2c;
+  color: #00ff88;
+  border: 1px solid #00ff88;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.instancia-container button {
+  background-color: #1e1e1e;
+  color: #00ff88;
+  border: 1px solid #00ff88;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.instancia-container button:hover {
+  background-color: #00ff88;
+  color: #000;
+}
