@@ -37,6 +37,10 @@ document.getElementById('createForm').addEventListener('submit', async function 
     }
 });
 
+document.getElementById('nome').addEventListener('input', function(e) {
+    this.value = this.value.replace(/\s+/g, '-');
+});
+
 function toggleQRCode(porta, el) {
     const iframe = document.getElementById(`qr-${porta}`);
     if (iframe.style.display === 'block') {
