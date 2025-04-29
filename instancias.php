@@ -13,8 +13,8 @@ if (file_exists($jsonPath)) {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="assets/css/shared.css">
-    <link rel="stylesheet" href="assets/css/instancias.css">
+    <link rel="stylesheet" href="assets/css/shared.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="assets/css/instancias-modern.css?v=<?= time() ?>">
     <title>Jutsu WhatsApp Manager</title>
 </head>
 <body>
