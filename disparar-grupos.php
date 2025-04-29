@@ -40,9 +40,9 @@ if (file_exists($jsonPath)) {
     </div>
   </header>
 
-  <div class="top-bar">
+  <div class="instancia-barra">
     <h1>📣 Disparar para Grupos</h1>
-    <div class="top-bar-controls">
+    <div class="instancia-controle">
       <label for="instanciaSelect">Instância:</label>
       <select id="instanciaSelect">
         <?php foreach ($instancias as $inst): ?>
@@ -51,9 +51,9 @@ if (file_exists($jsonPath)) {
           </option>
         <?php endforeach; ?>
       </select>
-      <!-- opcional: <button onclick="obterGrupos()">🔍 Obter Grupos</button> -->
     </div>
   </div>
+
 
 
   <!-- Seção 1: Obter IDs dos grupos -->
