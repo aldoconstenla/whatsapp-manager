@@ -15,7 +15,7 @@ if (file_exists($jsonPath)) {
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/css/shared.css?v=<?= time() ?>">
     <link rel="stylesheet" href="assets/css/instancias-modern.css?v=<?= time() ?>">
-    <title>Jutsu WhatsApp Manager</title>
+    <title>Jazap</title>
 </head>
 <body>
 

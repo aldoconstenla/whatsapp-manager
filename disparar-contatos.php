@@ -19,7 +19,7 @@ if (file_exists($jsonPath)) {
   <link rel="stylesheet" href="assets/css/shared.css?v=<?= time() ?>">
   <link rel="stylesheet" href="assets/css/disparar-contatos-modern.css?v=<?= time() ?>">
   <meta charset="UTF-8">
-  <title>Disparar para Contatos</title>
+  <title>Jazap - Disparar para Contatos</title>
 </head>
 <body>
 

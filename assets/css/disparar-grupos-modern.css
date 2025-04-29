@@ -1,0 +1,188 @@
+/* Fundo animado suave */
+body {
+  background: linear-gradient(135deg, #0a0a0a, #0f0f0f);
+  background-size: 400% 400%;
+  animation: neonBackground 15s ease infinite;
+}
+
+@keyframes neonBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Estilo do header */
+header {
+  background: #1a1a1a;
+  border-bottom: 2px solid #00ff88;
+  padding: 20px 40px;
+}
+
+/* Título principal */
+h1 {
+  margin: 0 auto 30px auto;
+  font-size: 30px;
+  color: #00ff88;
+  text-align: center;
+}
+
+/* Seletor de instância */
+#instanciaSelect {
+  margin-left: 10px;
+  background: #2c2c2c;
+  color: #00ff88;
+  border: 1px solid #00ff88;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Seções com visual sólido */
+.section {
+  margin-top: 40px;
+  background: #1e1e1e;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #00ff8822;
+}
+
+/* Busca de grupo */
+#buscaGrupo {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #00ff88;
+  background-color: #2a2a2a;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+/* Instruções */
+#instrucoesGrupos {
+  background: #121212;
+  border: 1px solid #00ff88;
+  padding: 12px 16px;
+  border-radius: 10px;
+  color: #ccc;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Painel da mensagem */
+.col-40 {
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #00ff8833;
+}
+
+/* Tabela grupos */
+.spreadsheet th,
+.spreadsheet td {
+  border: 1px solid #444;
+}
+
+.spreadsheet td {
+  background: #2a2a2a;
+  color: #f1f1f1;
+}
+
+/* Botões de formatação */
+.format-buttons .format-btn {
+  background-color: #1e1e1e;
+  border: 1px solid #00ff88;
+  color: #00ff88;
+}
+
+.format-buttons .format-btn:hover {
+  background-color: #00ff88;
+  color: #000;
+}
+
+/* Lightbox base */
+.lightbox-inner {
+  background: #1e1e1e;
+  border: 2px solid #00ff88;
+  padding: 30px;
+  border-radius: 12px;
+  color: #fff;
+}
+
+/* Inputs nos lightboxes */
+.lightbox input, .lightbox textarea {
+  background: #2a2a2a;
+  color: #fff;
+  border: 1px solid #00ff88;
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+}
+
+/* Botões lightbox */
+.lightbox button {
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.lightbox button:hover {
+  transform: scale(1.05);
+}
+
+/* Rodapé fixo */
+.footer-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #111;
+  border-top: 1px solid #00ff88;
+  box-shadow: 0 -2px 10px rgba(0, 255, 136, 0.2);
+  padding: 12px 40px;
+  z-index: 999;
+}
+
+.footer-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.footer-buttons button {
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  transition: 0.3s ease;
+  padding: 12px 22px;
+}
+
+/* Botão Disparar */
+.footer-buttons button:nth-child(1) {
+  background-color: #00ff88;
+  color: #000;
+  font-size: 18px;
+  border: 2px solid #00ff88;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+}
+
+.footer-buttons button:nth-child(1):hover {
+  background-color: #00cc6f;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+}
+
+/* Botões secundários */
+.footer-buttons button:nth-child(n+2) {
+  background-color: #1e1e1e;
+  color: #00ff88;
+  border: 1px solid #00ff88;
+}
+
+.footer-buttons button:nth-child(n+2):hover {
+  background-color: #00ff88;
+  color: #000;
+}
+
+/* Espaço extra para o rodapé */
+body {
+  padding-bottom: 140px;
+}
