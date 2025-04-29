@@ -23,9 +23,9 @@ if (file_exists($jsonPath)) {
     <img src="assets/img/jazap-logo.webp" style="width:145px">
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <div class="menu">
+        <a href="instancias.php" onclick="closeMenu()">Instâncias</a>
         <a href="disparar-contatos.php" onclick="closeMenu()">Disparar para Contatos</a>
         <a href="disparar-grupos.php" onclick="closeMenu()">Disparar para Grupos</a>
-        <a href="instancias.php" onclick="closeMenu()">Instâncias</a>
     </div>
 </header>
 

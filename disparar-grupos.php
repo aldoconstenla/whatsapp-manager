@@ -42,7 +42,7 @@ if (file_exists($jsonPath)) {
   <h1>📣 Disparar para Grupos</h1>
   <!-- Seletor de Instância -->
   <div>
-    <label for="instanciaSelect">Instância ativa:</label>
+    <label for="instanciaSelect">Instância:</label>
     <select id="instanciaSelect">
       <?php foreach ($instancias as $inst): ?>
         <option value="<?= htmlspecialchars($inst['nome']) ?>|<?= htmlspecialchars($inst['porta']) ?>">
