@@ -1,13 +1,8 @@
-/* Estrutura principal */
+/* Fundo Neon Animado */
 body {
-  margin: 0;
-  padding: 60px 20px;
   background: linear-gradient(135deg, #0a0a0a, #0f0f0f);
   background-size: 400% 400%;
   animation: neonBackground 15s ease infinite;
-  color: #00ff88;
-  font-family: 'Courier New', monospace;
-  min-height: 100vh;
 }
 
 @keyframes neonBackground {
@@ -16,64 +11,11 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* Header */
+/* Ajustes do Header - respeita shared */
 header {
-  width: 100%;
-  background: #1e1e1e;
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background: rgba(30, 30, 30, 0.95);
   border-bottom: 2px solid #00ff88;
-  margin-bottom: 40px;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 28px;
-  color: #00ff88;
-}
-
-.menu-toggle {
-  display: none;
-  font-size: 28px;
-  cursor: pointer;
-  color: #00ff88;
-}
-
-.menu {
-  display: flex;
-  gap: 20px;
-}
-
-.menu a {
-  text-decoration: none;
-  color: #00ff88;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-.menu a:hover {
-  color: #ffffff;
-}
-
-/* Responsivo para header */
-@media (max-width: 768px) {
-  .menu {
-    display: none;
-    flex-direction: column;
-    background: #1e1e1e;
-    padding: 20px;
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    border: 2px solid #00ff88;
-    border-radius: 10px;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
+  padding: 20px 40px;
 }
 
 /* Grid Principal */
@@ -83,9 +25,10 @@ header h1 {
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: center;
+  margin-top: 40px;
 }
 
-/* Containers */
+/* Formulário e Instâncias Containers */
 .form-container,
 .instancias-container {
   background: rgba(30, 30, 30, 0.95);
@@ -105,15 +48,16 @@ header h1 {
   min-width: 480px;
 }
 
-/* Títulos */
-.form-container h2, 
+/* Títulos internos */
+.form-container h2,
 .instancias-container h2 {
+  color: #00ff88;
   margin-top: 0;
   margin-bottom: 20px;
   font-size: 24px;
 }
 
-/* Formulário */
+/* Inputs */
 label {
   display: block;
   margin: 15px 0 5px;
@@ -136,7 +80,7 @@ input[type="text"]:focus {
   box-shadow: 0 0 10px #00ff88aa;
 }
 
-/* Botão principal */
+/* Botões */
 button {
   margin-top: 20px;
   padding: 12px 24px;
@@ -155,7 +99,7 @@ button:hover {
   background: #00e676;
 }
 
-/* Status Message */
+/* Mensagem de status */
 .status-message {
   padding: 12px;
   margin-top: 20px;
@@ -165,7 +109,7 @@ button:hover {
   display: none;
 }
 
-/* Instância Cards */
+/* Card de Instância */
 .instancia {
   margin-bottom: 30px;
   padding: 20px;
@@ -173,6 +117,10 @@ button:hover {
   border-radius: 12px;
   position: relative;
   box-shadow: 0 0 10px #00ff8844;
+}
+
+.instancia:last-child {
+  margin-bottom: 0px;
 }
 
 .instancia-header {
@@ -232,19 +180,28 @@ button:hover {
   background: #00cc6f;
 }
 
-/* Iframe QR */
+/* Iframe QR Code */
 iframe {
   margin-top: 15px;
   width: 100%;
-  height: 400px;
+  height: 420px;
   background: #fff;
   border: 2px solid #00ff88;
   border-radius: 10px;
   display: none;
 }
 
-/* Status de deletar */
+/* Status deletar */
 .delete-status {
   margin-top: 14px;
   font-size: 14px;
+}
+
+/* Melhorias do menu (SEM alterar funcionamento original) */
+.menu {
+  backdrop-filter: blur(8px);
+}
+
+.menu a {
+  font-weight: bold;
 }
