@@ -51,7 +51,6 @@ if (file_exists($jsonPath)) {
         </option>
       <?php endforeach; ?>
     </select>
-    <button id="btnObterGrupos" onclick="obterGrupos()">🔍 Obter Grupos</button>
   </div>
 
   <!-- Seção 1: Obter IDs dos grupos -->
@@ -148,6 +147,7 @@ if (file_exists($jsonPath)) {
   <div class="footer-bar">
     <div class="footer-buttons">
       <button onclick="abrirLightboxConfirmacao()">🚀 Disparar</button>
+      <button id="btnObterGrupos" onclick="obterGrupos()">🔍 Obter Grupos</button>
       <button onclick="abrirLightboxAgendamento()">⏰ Agendar Disparo</button>
       <button onclick="abrirLightboxAgendamentos()">📅 Ver Agendados</button>
     </div>
