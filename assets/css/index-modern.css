@@ -37,13 +37,14 @@ h1 {
 /* Container de botões */
 .dashboard {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: 40px;
   max-width: 1000px;
   width: 100%;
   animation: fadeIn 1.4s ease-out forwards;
   opacity: 0;
+  flex-wrap: nowrap; /* Mantém 3 botões lado a lado */
 }
 
 /* Botões */
@@ -51,7 +52,7 @@ h1 {
   background: rgba(30, 30, 30, 0.9);
   border: 2px solid #00ff88;
   border-radius: 18px;
-  width: 260px;
+  width: 280px; /* Ajustado para caber 3 botões alinhados */
   height: 220px;
   padding: 40px 30px;
   text-align: center;
@@ -86,8 +87,12 @@ h1 {
   box-shadow: 0 0 25px #00ff88aa, 0 0 40px #00ff8855;
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
+/* Responsivo para telas pequenas */
+@media (max-width: 900px) {
+  .dashboard {
+    flex-wrap: wrap; /* Em telas menores, permite quebrar */
+  }
+
   .dash-button {
     width: 90%;
     height: 160px;
