@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" type="image/webp" href="assets/img/favicon.webp">
   <title>Login</title>
   <link rel="stylesheet" href="assets/css/login-modern.css?v=<?= time() ?>">
 </head>

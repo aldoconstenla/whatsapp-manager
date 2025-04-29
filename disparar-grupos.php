@@ -24,6 +24,7 @@ if (file_exists($jsonPath)) {
   <link rel="stylesheet" href="assets/css/shared.css?v=<?= time() ?>">
   <link rel="stylesheet" href="assets/css/disparar-grupos-modern.css?v=<?= time() ?>">
   <meta charset="UTF-8">
+  <link rel="icon" type="image/webp" href="assets/img/favicon.webp">
   <title>Jazap - Disparar para Grupos</title>
 </head>
 
