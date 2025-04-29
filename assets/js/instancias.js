@@ -102,41 +102,45 @@ function mostrarEndpoints(porta) {
 
     let lista = endpoints.map(ep =>
         `🔹 <strong>${ep.nome}</strong><br>` +
-        `📎 <code>https://${porta}.bravosdigital.com.br${ep.url}</code><br>` +
+        `📎 <code data-url="https://${porta}.bravosdigital.com.br${ep.url}">https://${porta}.bravosdigital.com.br${ep.url}</code><br>` +
         (ep.body ? `📦 <em>Body:</em> ${ep.body}<br><br>` : `<br>`)
     ).join('');
 
     const box = document.createElement('div');
-    box.setAttribute('data-overlay-endpoints', ''); // <- marcador para facilitar remoção
+    box.setAttribute('data-overlay-endpoints', '');
     box.innerHTML = `
-        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-                    background: rgba(0,0,0,0.7); z-index: 9999; display: flex; 
-                    justify-content: center; align-items: center;"
-             data-overlay-endpoints>
-            <div style="background: #1e1e1e; color: #fff; padding: 20px; border-radius: 10px; 
-                        max-width: 600px; max-height: 80vh; overflow-y: auto;">
-                <h3 style="margin-top: 0;">📘 Endpoints da Instância</h3>
-                ${lista}
-                <div style="text-align: right;">
-                    <button onclick="this.closest('[data-overlay-endpoints]').remove()" 
-                            style="margin-top: 10px; padding: 6px 14px; background: #00ff88; 
-                                   border: none; color: #000; border-radius: 6px; cursor: pointer;">
-                        Fechar
-                    </button>
-                </div>
+        <div>
+            <h3>📘 Endpoints da Instância</h3>
+            ${lista}
+            <div style="text-align: right;">
+                <button onclick="this.closest('[data-overlay-endpoints]').remove()">Fechar</button>
             </div>
         </div>
     `;
 
     document.body.appendChild(box);
-    // Fecha se clicar fora da caixa interna
-    const overlay = box.querySelector('[data-overlay-endpoints]');
-    const caixaInterna = overlay.querySelector('div'); // primeira div interna é a caixa
 
-    overlay.addEventListener('click', (e) => {
-      if (!caixaInterna.contains(e.target)) {
-        overlay.remove();
-      }
+    // Evento de copiar para todos <code>
+    document.querySelectorAll('[data-url]').forEach(code => {
+        code.addEventListener('click', function() {
+            const texto = this.getAttribute('data-url');
+            navigator.clipboard.writeText(texto).then(() => {
+                this.style.background = '#00cc6f';
+                this.style.color = '#000';
+                setTimeout(() => {
+                    this.style.background = '#111';
+                    this.style.color = '#00ff88';
+                }, 1000);
+            });
+        });
     });
 
+    // Fechar clicando fora
+    const overlay = box.querySelector('[data-overlay-endpoints]');
+    const caixaInterna = overlay.querySelector('div');
+    overlay.addEventListener('click', (e) => {
+        if (!caixaInterna.contains(e.target)) {
+            overlay.remove();
+        }
+    });
 }

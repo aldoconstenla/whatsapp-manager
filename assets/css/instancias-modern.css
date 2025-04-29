@@ -205,3 +205,73 @@ iframe {
 .menu a {
   font-weight: bold;
 }
+
+/* Lightbox de Endpoints */
+[data-overlay-endpoints] {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(6px);
+}
+
+[data-overlay-endpoints] > div {
+  background: #1e1e1e;
+  color: #00ff88;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 0 20px #00ff8844;
+  animation: fadeIn 0.5s ease;
+}
+
+[data-overlay-endpoints] h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #00ff88;
+}
+
+/* Estilo dos links de endpoints */
+[data-overlay-endpoints] code {
+  display: inline-block;
+  margin-top: 5px;
+  background: #111;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+[data-overlay-endpoints] code:hover {
+  background: #00ff88;
+  color: #000;
+  transform: scale(1.05);
+}
+
+[data-overlay-endpoints] em {
+  color: #888;
+  font-size: 14px;
+}
+
+/* Botão fechar */
+[data-overlay-endpoints] button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #00ff88;
+  border: none;
+  color: #000;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+[data-overlay-endpoints] button:hover {
+  background: #00e676;
+}
