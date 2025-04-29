@@ -13,7 +13,7 @@ require __DIR__ . '/scripts/auth.php';
 </head>
 <body>
 
-<h1>WhatsApp Manager</h1>
+<img src="assets/img/jazap-logo.webp" style="width: 270px;margin-bottom: 20px;">
 
 <div class="dashboard">
   <a class="dash-button" href="disparar-contatos.php">
