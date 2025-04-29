@@ -312,3 +312,37 @@ div:has(#instanciaSelect) {
   color: #00ff88;
   font-size: 16px;
 }
+
+.instancia-barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 40px 10px 40px;
+  flex-wrap: wrap;
+}
+
+.instancia-barra h1 {
+  margin: 0;
+  font-size: 30px;
+  color: #00ff88;
+}
+
+.instancia-controle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.instancia-controle label {
+  color: #00ff88;
+  font-weight: bold;
+}
+
+.instancia-controle select {
+  background: #2a2a2a;
+  border: 2px solid #00ff88;
+  border-radius: 8px;
+  padding: 10px;
+  color: #00ff88;
+  font-size: 16px;
+}
