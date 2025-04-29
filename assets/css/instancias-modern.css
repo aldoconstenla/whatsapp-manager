@@ -316,3 +316,27 @@ iframe {
   50% { transform: scale(1.1); }
   100% { transform: scale(1.05); }
 }
+
+/* Toast de Copiado */
+.toast-copiado {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #00ff88;
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 0 15px #00ff8844;
+  opacity: 0;
+  animation: fadeToast 2s forwards;
+  z-index: 10000;
+  font-size: 14px;
+}
+
+@keyframes fadeToast {
+  0% { opacity: 0; transform: translateY(20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(20px); }
+}

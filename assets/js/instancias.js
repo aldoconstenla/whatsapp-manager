@@ -91,8 +91,9 @@ document.querySelectorAll('.delete-form').forEach(form => {
 });
 
 function mostrarEndpoints(porta) {
-    // Nome da instância vem do porta atual carregada
-    const nomeInstancia = porta; // ou ajuste se quiser um nome mais bonito vindo do servidor futuramente
+    // Obter nome real da instância via DOM
+    const instanciaElement = document.querySelector(`.instancia-header [onclick*="${porta}"]`)?.closest('.instancia')?.querySelector('.instancia-name');
+    const nomeInstancia = instanciaElement ? instanciaElement.textContent.trim() : porta;
 
     const endpoints = [
         { nome: "Enviar mensagem particular (POST)", url: `/send-message`, body: "number, message" },
@@ -109,48 +110,65 @@ function mostrarEndpoints(porta) {
         (ep.body ? `📦 <em>Body:</em> ${ep.body}<br><br>` : `<br>`)
     ).join('');
 
-    const box = document.createElement('div');
-    box.setAttribute('data-overlay-endpoints', '');
-    box.innerHTML = `
-        <div>
-            <h3>📘 Endpoints da Instância <code data-copy="${nomeInstancia}" style="font-size:16px;">${nomeInstancia}</code></h3>
+    const overlay = document.createElement('div');
+    overlay.setAttribute('data-overlay-endpoints', '');
+    overlay.innerHTML = `
+        <div class="overlay-inner">
+            <h3>📘 Endpoints da Instância 
+                <code data-copy="${nomeInstancia}" style="font-size:16px;">${nomeInstancia}</code>
+            </h3>
             ${lista}
             <div style="text-align: right;">
-                <button onclick="this.closest('[data-overlay-endpoints]').remove()">Fechar</button>
+                <button onclick="document.querySelector('[data-overlay-endpoints]').remove()">Fechar</button>
             </div>
         </div>
     `;
 
-    document.body.appendChild(box);
+    document.body.appendChild(overlay);
 
-    // Evento copiar URLs dos endpoints
-    document.querySelectorAll('[data-url]').forEach(code => {
-        code.addEventListener('click', function() {
+    // Copiar ao clicar nas URLs
+    overlay.querySelectorAll('[data-url]').forEach(code => {
+        code.addEventListener('click', function () {
             const texto = this.getAttribute('data-url');
             navigator.clipboard.writeText(texto).then(() => {
                 this.classList.add('copied');
+                mostrarToast('Copiado para a área de transferência ✅');
                 setTimeout(() => this.classList.remove('copied'), 1000);
             });
         });
     });
 
-    // Evento copiar Nome da Instância
-    document.querySelectorAll('[data-copy]').forEach(code => {
-        code.addEventListener('click', function() {
+    // Copiar ao clicar no nome da instância
+    overlay.querySelectorAll('[data-copy]').forEach(code => {
+        code.addEventListener('click', function () {
             const texto = this.getAttribute('data-copy');
             navigator.clipboard.writeText(texto).then(() => {
                 this.classList.add('copied');
+                mostrarToast('Nome da instância copiado ✅');
                 setTimeout(() => this.classList.remove('copied'), 1000);
             });
         });
     });
 
-    // Fecha lightbox ao clicar fora
-    const overlay = box.querySelector('[data-overlay-endpoints]');
-    const caixaInterna = overlay.querySelector('div');
+    // Fechar ao clicar fora
     overlay.addEventListener('click', (e) => {
-        if (!caixaInterna.contains(e.target)) {
+        const inner = overlay.querySelector('.overlay-inner');
+        if (!inner.contains(e.target)) {
             overlay.remove();
         }
     });
 }
+
+// Função Toast (adicione esta também no seu JS se ainda não adicionou)
+function mostrarToast(mensagem) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-copiado';
+    toast.innerText = mensagem;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 2000);
+}
+
+
