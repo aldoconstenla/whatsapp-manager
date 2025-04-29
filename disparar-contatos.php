@@ -17,14 +17,14 @@ if (file_exists($jsonPath)) {
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="assets/css/shared.css?v=<?= time() ?>">
-  <link rel="stylesheet" href="assets/css/disparar-contatos.css?v=<?= time() ?>">
+  <link rel="stylesheet" href="assets/css/disparar-contatos-modern.css?v=<?= time() ?>">
   <meta charset="UTF-8">
   <title>Disparar para Contatos</title>
 </head>
 <body>
 
   <header>
-    <h1>📤 Disparar para Contatos</h1>
+    <img src="assets/img/jazap-logo.webp" style="width:145px">
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <div class="menu" id="menuDropdown">
       <a href="instancias.php" onclick="closeMenu()">Instâncias</a>
@@ -32,7 +32,7 @@ if (file_exists($jsonPath)) {
       <a href="disparar-grupos.php" onclick="closeMenu()">Disparar para Grupos</a>
     </div>
   </header>
-
+  <h1>📤 Disparar para Contatos</h1>
   <div class="instance-select">
     <label for="instancia">Instância:</label>
     <select id="instancia">
