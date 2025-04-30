@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
   <div class="login-container">
   <h1>
-    <img src="assets/img/jazap-logo.webp" style="width:145px;margin:-20px"><br>
+    <img src="assets/img/jazap-logo.webp" style="width:145px;margin:-20px 0 -20px -8px"><br>
     <span class="sub">🔐 Acesso Restrito</span>
   </h1>
 
