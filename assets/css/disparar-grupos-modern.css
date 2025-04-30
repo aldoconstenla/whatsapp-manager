@@ -226,3 +226,29 @@ textarea {
 .lightbox button:hover {
   transform: scale(1.05);
 }
+
+/* Context Menu */
+#contextMenu {
+  position: absolute;
+  z-index: 9999;
+  display: none;
+  width: 180px;
+  background-color: #121212;
+  border: 2px solid #00ff88;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #00ff88aa;
+  padding: 8px 0;
+  font-family: monospace;
+}
+
+#contextMenu .context-option {
+  padding: 12px 16px;
+  color: #00ff88;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+#contextMenu .context-option:hover {
+  background-color: #00ff88;
+  color: #000;
+}
