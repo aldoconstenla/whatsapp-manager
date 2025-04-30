@@ -1087,4 +1087,21 @@ async function excluirAgendamento(index) {
 
 document.addEventListener('click', fecharContextMenu);
 document.addEventListener('scroll', fecharContextMenu, true); // true propaga até os scrolls internos
+
+function setupFecharAoClicarFora(idLightbox) {
+  document.addEventListener('click', function (e) {
+    const lightbox = document.getElementById(idLightbox);
+    const inner = lightbox?.querySelector('.lightbox-inner');
+
+    if (lightbox?.style.display === 'flex' && !inner?.contains(e.target)) {
+      lightbox.style.display = 'none';
+    }
+  });
+}
+
+// Aplicar para as lightboxes principais
+setupFecharAoClicarFora('lightbox-agendamentos');
+setupFecharAoClicarFora('lightbox-agendar');
+
+
 window.addEventListener('resize', fecharContextMenu);
