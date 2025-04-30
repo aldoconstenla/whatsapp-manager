@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
   <div class="login-container">
   <h1>
-    WhatsApp Manager<br>
+    <img src="assets/img/jazap-logo.webp" style="width:145px"><br>
     <span class="sub">🔐 Acesso Restrito</span>
   </h1>
 
