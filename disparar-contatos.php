@@ -33,91 +33,93 @@ if (file_exists($jsonPath)) {
       <a href="disparar-grupos.php" onclick="closeMenu()">Disparar para Grupos</a>
     </div>
   </header>
-  <div class="top-bar">
-    <h1>📤 Disparar para Contatos</h1>
-    <div class="top-bar-controls">
-      <label for="instancia">Instância:</label>
-      <select id="instancia">
-        <?php foreach ($instancias as $inst) : ?>
-          <option value="<?= htmlspecialchars($inst['nome']) ?>|<?= htmlspecialchars($inst['porta']) ?>">
-            <?= htmlspecialchars($inst['nome']) ?>
-          </option>
-        <?php endforeach; ?>
-      </select>
-      <!-- Se quiser adicionar botão aqui -->
-      <!-- <button onclick="obterContatos()">🔍 Obter Contatos</button> -->
-    </div>
-  </div>
 
-
-  <div class="top-controls">
-    <div class="spreadsheet-container">
-      <div id="mensagem-erro" style="color: #ff4d4d; font-weight: bold; margin-bottom: 10px; display: none;"></div>
-      <div id="dropzone" contenteditable="true" onpaste="handlePaste(event)">
-        Clique aqui e cole os nomes e/ou números
-      </div>
-
-      <table class="spreadsheet" id="planilha">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Nome</th>
-            <th>Telefone</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <div class="small">* Os dados serão salvos na sessão ao clicar em Disparar.<br><i>(clique em Limpar para remover sessão ativa)</i></div>
-    </div>
-
-    <div class="copy-container">
-      <div class="format-buttons" style="margin-bottom: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
-        <button type="button" class="format-btn" onclick="inserirNoCursor('{Nome}')">{Nome}</button>
-        <button type="button" class="format-btn" onclick="formatarTexto('negrito')"><strong>B</strong></button>
-        <button type="button" class="format-btn" onclick="formatarTexto('italico')"><em>I</em></button>
-        <button type="button" class="format-btn" onclick="salvarMensagemAtual()">💾</button>
-        <button type="button" class="format-btn" onclick="abrirLightboxMensagens()">📂</button>
-      </div>
-      <label for="mensagem">Mensagem a ser enviada:</label>
-
-      <textarea id="mensagem" placeholder="Digite aqui sua mensagem..." oninput="sincronizarMensagem()"></textarea>
-
-      <div class="btn-ia-wrapper">
-        <button id="btnReverterIA" onclick="reverterIA()" style="display: none; margin-right: 10px;">
-          ↩ Reverter
-        </button>
-        <button id="btnMelhorarIA" onclick="melhorarComIA()">
-          <span class="icon">✨</span>
-          <span class="text">Formatar com IA</span>
-        </button>
-      </div>
-
-  </div>
-
-  <!-- Lightbox de Confirmação -->
-  <div id="lightbox-confirmacao" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.75); z-index: 9999; align-items: center; justify-content: center;">
-    <div style="background: #1e1e1e; border: 2px solid #00ff88; padding: 30px; border-radius: 12px; max-width: 500px; text-align: center; color: #f1f1f1; box-shadow: 0 0 25px #00ff8860;">
-      <h2 style="color: #00ff88;">⚠️ Cuidado!</h2>
-      <p style="font-size: 18px; margin-bottom: 20px;">Com grandes poderes, vem grandes responsabilidades.</p>
-      <p style="font-size: 16px;">Você está iniciando um disparo em massa a partir da instância:</p>
-      <div style="margin: 10px 0;">
-        <select id="instancia-lightbox" style="font-size: 20px; font-weight: bold; background: #1e1e1e; border: 2px solid #00ff88; border-radius: 8px; color: #00ff88; padding: 10px;">
+  <div style="padding:0 40px 0 40px">
+    <div class="top-bar">
+      <h1>📤 Disparar para Contatos</h1>
+      <div class="top-bar-controls">
+        <label for="instancia">Instância:</label>
+        <select id="instancia">
           <?php foreach ($instancias as $inst) : ?>
             <option value="<?= htmlspecialchars($inst['nome']) ?>|<?= htmlspecialchars($inst['porta']) ?>">
               <?= htmlspecialchars($inst['nome']) ?>
             </option>
           <?php endforeach; ?>
         </select>
+        <!-- Se quiser adicionar botão aqui -->
+        <!-- <button onclick="obterContatos()">🔍 Obter Contatos</button> -->
       </div>
-      <p style="margin-bottom: 25px;"><b>Tem certeza que deseja iniciar?</b><br><br><i>Se tiver configurado algo errado, o japa vai comer o seu toco...</i></p>
-      <div style="display: flex; justify-content: center; gap: 20px;">
-        <button onclick="confirmarDisparo()" style="background: #00ff88; color: #000; padding: 10px 20px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer;">✅ Tenho certeza, pode disparar!</button>
-        <button onclick="fecharLightbox()" style="background: #444; color: #fff; padding: 10px 20px; border-radius: 8px; border: 1px solid #00ff88; font-weight: bold; cursor: pointer;">🔍 Conferir detalhes</button>
+    </div>
+
+
+    <div class="top-controls">
+      <div class="spreadsheet-container">
+        <div id="mensagem-erro" style="color: #ff4d4d; font-weight: bold; margin-bottom: 10px; display: none;"></div>
+        <div id="dropzone" contenteditable="true" onpaste="handlePaste(event)">
+          Clique aqui e cole os nomes e/ou números
+        </div>
+
+        <table class="spreadsheet" id="planilha">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Nome</th>
+              <th>Telefone</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div class="small">* Os dados serão salvos na sessão ao clicar em Disparar.<br><i>(clique em Limpar para remover sessão ativa)</i></div>
+      </div>
+
+      <div class="copy-container">
+        <div class="format-buttons" style="margin-bottom: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
+          <button type="button" class="format-btn" onclick="inserirNoCursor('{Nome}')">{Nome}</button>
+          <button type="button" class="format-btn" onclick="formatarTexto('negrito')"><strong>B</strong></button>
+          <button type="button" class="format-btn" onclick="formatarTexto('italico')"><em>I</em></button>
+          <button type="button" class="format-btn" onclick="salvarMensagemAtual()">💾</button>
+          <button type="button" class="format-btn" onclick="abrirLightboxMensagens()">📂</button>
+        </div>
+        <label for="mensagem">Mensagem a ser enviada:</label>
+
+        <textarea id="mensagem" placeholder="Digite aqui sua mensagem..." oninput="sincronizarMensagem()"></textarea>
+
+        <div class="btn-ia-wrapper">
+          <button id="btnReverterIA" onclick="reverterIA()" style="display: none; margin-right: 10px;">
+            ↩ Reverter
+          </button>
+          <button id="btnMelhorarIA" onclick="melhorarComIA()">
+            <span class="icon">✨</span>
+            <span class="text">Formatar com IA</span>
+          </button>
+        </div>
+
+    </div>
+
+    <!-- Lightbox de Confirmação -->
+    <div id="lightbox-confirmacao" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.75); z-index: 9999; align-items: center; justify-content: center;">
+      <div style="background: #1e1e1e; border: 2px solid #00ff88; padding: 30px; border-radius: 12px; max-width: 500px; text-align: center; color: #f1f1f1; box-shadow: 0 0 25px #00ff8860;">
+        <h2 style="color: #00ff88;">⚠️ Cuidado!</h2>
+        <p style="font-size: 18px; margin-bottom: 20px;">Com grandes poderes, vem grandes responsabilidades.</p>
+        <p style="font-size: 16px;">Você está iniciando um disparo em massa a partir da instância:</p>
+        <div style="margin: 10px 0;">
+          <select id="instancia-lightbox" style="font-size: 20px; font-weight: bold; background: #1e1e1e; border: 2px solid #00ff88; border-radius: 8px; color: #00ff88; padding: 10px;">
+            <?php foreach ($instancias as $inst) : ?>
+              <option value="<?= htmlspecialchars($inst['nome']) ?>|<?= htmlspecialchars($inst['porta']) ?>">
+                <?= htmlspecialchars($inst['nome']) ?>
+              </option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <p style="margin-bottom: 25px;"><b>Tem certeza que deseja iniciar?</b><br><br><i>Se tiver configurado algo errado, o japa vai comer o seu toco...</i></p>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+          <button onclick="confirmarDisparo()" style="background: #00ff88; color: #000; padding: 10px 20px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer;">✅ Tenho certeza, pode disparar!</button>
+          <button onclick="fecharLightbox()" style="background: #444; color: #fff; padding: 10px 20px; border-radius: 8px; border: 1px solid #00ff88; font-weight: bold; cursor: pointer;">🔍 Conferir detalhes</button>
+        </div>
       </div>
     </div>
   </div>
-
   <div class="footer-bar">
     <div class="footer-buttons">
       <button onclick="abrirLightboxConfirmacao()">🚀 Disparar</button>

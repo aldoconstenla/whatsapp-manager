@@ -30,6 +30,7 @@ if (file_exists($jsonPath)) {
     </div>
 </header>
 
+<div style="padding:0 40px 0 40px">
 <div class="grid">
     <div class="form-container">
         <h2>Nova Instância</h2>
@@ -70,7 +71,7 @@ if (file_exists($jsonPath)) {
         <?php endif; ?>
     </div>
 </div>
-
+</div>
 <script src="assets/js/instancias.js?v=<?= time() ?>"></script>
 
 </body>
