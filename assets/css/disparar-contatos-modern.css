@@ -84,10 +84,6 @@ h1 {
   box-shadow: 0 0 15px #00ff8822;
 }
 
-textarea {
-  min-height: 240px;
-}
-
 /* Botões da IA */
 .btn-ia-wrapper {
   display: flex;

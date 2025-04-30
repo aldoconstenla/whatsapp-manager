@@ -128,10 +128,6 @@ h1 {
   color: #000;
 }
 
-textarea {
-  min-height: 240px;
-}
-
 .footer-bar {
   position: fixed;
   bottom: 0;
