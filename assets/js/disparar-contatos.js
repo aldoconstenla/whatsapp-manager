@@ -49,7 +49,7 @@ function addRow(nome = '', telefone = '') {
   const linha = document.createElement('tr');
 
   linha.innerHTML = `
-    <td class="delete-row" onclick="this.parentElement.remove()">✖</td>
+    <td class="delete-row" onclick="handleDeleteRow(this)" style="color:red; cursor:pointer;">✖</td>
     <td contenteditable="true"></td>
     <td contenteditable="true"></td>
     <td class="status">—</td>
@@ -84,6 +84,22 @@ function addRow(nome = '', telefone = '') {
   // Foca no campo nome recém criado (se não for preenchido por paste)
   if (!nome && !telefone) {
     cells[0].focus();
+  }
+}
+
+function handleDeleteRow(el) {
+  const tbody = document.querySelector('#planilha tbody');
+  const linhas = tbody.querySelectorAll('tr');
+
+  if (linhas.length === 1) {
+    // Se só existe 1 linha, apenas limpa os campos dela
+    const cells = linhas[0].querySelectorAll('td');
+    if (cells[1]) cells[1].innerText = '';
+    if (cells[2]) cells[2].innerText = '';
+    if (cells[3]) cells[3].innerText = '—';
+  } else {
+    // Remove normalmente
+    el.parentElement.remove();
   }
 }
 
