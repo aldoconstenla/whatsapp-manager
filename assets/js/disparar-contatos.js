@@ -720,15 +720,6 @@ async function salvarAgendamento() {
   }
 }
 
-document.addEventListener('click', function (event) {
-  const lightbox = document.getElementById('lightbox-ver-agendamentos');
-  const inner = lightbox.querySelector('.lightbox-inner');
-
-  // Verifica se o lightbox está visível e o clique foi fora da .lightbox-inner
-  if (lightbox.style.display === 'flex' && !inner.contains(event.target)) {
-    lightbox.style.display = 'none';
-  }
-});
 
 
 window.addEventListener('DOMContentLoaded', async () => {
