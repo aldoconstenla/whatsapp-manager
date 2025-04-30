@@ -74,12 +74,13 @@ if (file_exists($jsonPath)) {
 
       <div class="copy-container">
         <div class="format-buttons" style="margin-bottom: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
-          <button type="button" class="format-btn" onclick="inserirNoCursor('{Nome}')">{Nome}</button>
-          <button type="button" class="format-btn" onclick="formatarTexto('negrito')"><strong>B</strong></button>
-          <button type="button" class="format-btn" onclick="formatarTexto('italico')"><em>I</em></button>
-          <button type="button" class="format-btn" onclick="salvarMensagemAtual()">💾</button>
-          <button type="button" class="format-btn" onclick="abrirLightboxMensagens()">📂</button>
+          <button type="button" class="format-btn" title="Adicionar nome" onclick="inserirNoCursor('{Nome}')">{Nome}</button>
+          <button type="button" class="format-btn" title="Negrito" onclick="formatarTexto('negrito')"><strong>B</strong></button>
+          <button type="button" class="format-btn" title="Itálico" onclick="formatarTexto('italico')"><em>I</em></button>
+          <button type="button" class="format-btn" title="Salvar mensagem" onclick="salvarMensagemAtual()">💾</button>
+          <button type="button" class="format-btn" title="Carregar mensagem salva" onclick="abrirLightboxMensagens()">📂</button>
         </div>
+
         <label for="mensagem">Mensagem a ser enviada:</label>
 
         <textarea id="mensagem" placeholder="Digite aqui sua mensagem..." oninput="sincronizarMensagem()"></textarea>
