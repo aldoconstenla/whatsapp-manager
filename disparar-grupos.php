@@ -55,21 +55,19 @@ if (file_exists($jsonPath)) {
   </div>
 
   <!-- Seção 1: Obter IDs dos grupos -->
-  <div class="section">
-    <div class="section" id="gruposListados" style="display: none;">
-      <input type="text" id="buscaGrupo" placeholder="🔍 Buscar grupo...">
-      <div id="instrucoesGrupos" style="margin-bottom: 15px; background: #1a1a1a; border: 1px solid #00ff88; padding: 10px 15px; border-radius: 8px; font-size: 14px; line-height: 1.5; display: none;">
-        👉 Clique no(s) grupo(s) que deseja enviar mensagem para adicioná-lo(s) à lista de envio.<br>
-        🖱️ Clique com o botão direito do mouse para <strong>mudar o nome</strong> ou <strong>a descrição</strong> do grupo.
-      </div>
-
-      <table class="spreadsheet" id="tabelaGrupos">
-        <thead><tr><th>Nome</th><th>ID</th></tr></thead>
-        <tbody></tbody>
-      </table>
-
-      <div style="margin-top: 10px; display: flex; gap: 8px;" id="paginacaoGrupos"></div>
+  <div class="section" id="gruposListados" style="display: none;">
+    <input type="text" id="buscaGrupo" placeholder="🔍 Buscar grupo...">
+    <div id="instrucoesGrupos" style="margin-bottom: 15px; background: #1a1a1a; border: 1px solid #00ff88; padding: 10px 15px; border-radius: 8px; font-size: 14px; line-height: 1.5; display: none;">
+      👉 Clique no(s) grupo(s) que deseja enviar mensagem para adicioná-lo(s) à lista de envio.<br>
+      🖱️ Clique com o botão direito do mouse para <strong>mudar o nome</strong> ou <strong>a descrição</strong> do grupo.
     </div>
+
+    <table class="spreadsheet" id="tabelaGrupos">
+      <thead><tr><th>Nome</th><th>ID</th></tr></thead>
+      <tbody></tbody>
+    </table>
+
+    <div style="margin-top: 10px; display: flex; gap: 8px;" id="paginacaoGrupos"></div>
   </div>
 
   <!-- Seção 2: Disparar para Grupos -->
