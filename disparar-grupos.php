@@ -54,8 +54,6 @@ if (file_exists($jsonPath)) {
     </div>
   </div>
 
-
-
   <!-- Seção 1: Obter IDs dos grupos -->
   <div class="section">
     <div class="section" id="gruposListados" style="display: none;">
