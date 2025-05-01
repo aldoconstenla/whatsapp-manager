@@ -1,20 +1,5 @@
 <?php
-session_start();
-
-$empresa = $_SESSION['empresa'] ?? null;
-
-if (!$empresa) {
-  echo json_encode([]);
-  exit;
-}
-
-$dir = __DIR__ . "/../listas_de_envio/{$empresa}";
-if (!is_dir($dir)) {
-  echo json_encode([]);
-  exit;
-}
-
-$arquivos = glob($dir . '/lista-*.json');
+$arquivos = glob(__DIR__ . '/listas_de_envio/lista-*.json');
 $listas = [];
 
 foreach ($arquivos as $arquivo) {

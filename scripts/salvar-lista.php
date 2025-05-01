@@ -10,22 +10,7 @@ if (!$nome || !is_array($contatos)) {
   exit;
 }
 
-session_start();
-$empresa = $_SESSION['empresa'] ?? null;
-
-if (!$empresa) {
-  http_response_code(403);
-  echo json_encode(['erro' => 'Empresa não identificada']);
-  exit;
-}
-
-$dirEmpresa = __DIR__ . "/../listas_de_envio/{$empresa}";
-if (!is_dir($dirEmpresa)) {
-  mkdir($dirEmpresa, 0777, true);
-}
-
-$caminho = "{$dirEmpresa}/lista-{$nome}.json";
-
+$caminho = __DIR__ . "/listas_de_envio/lista-{$nome}.json";
 $salvo = file_put_contents($caminho, json_encode($contatos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
 if ($salvo === false) {
