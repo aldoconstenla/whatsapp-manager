@@ -12,7 +12,12 @@ $jsonPath = __DIR__ . "/scripts/instancias.json";
 require __DIR__ . '/scripts/config-webhooks.php';
 
 if (file_exists($jsonPath)) {
-    $instancias = json_decode(file_get_contents($jsonPath), true);
+    $todasInstancias = json_decode(file_get_contents($jsonPath), true);
+    $empresaUsuario = $_SESSION['empresa'] ?? '';
+
+    $instancias = array_filter($todasInstancias, function ($inst) use ($empresaUsuario) {
+        return isset($inst['empresa']) && $inst['empresa'] === $empresaUsuario;
+    });
 }
 ?>
 
