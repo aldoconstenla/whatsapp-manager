@@ -1,16 +1,19 @@
 <?php
 
-require __DIR__ . '/scripts/auth.php';
-
+require __DIR__ . '/scripts/auth.php'; // já faz $_SESSION['usuario'] e $_SESSION['empresa']
 $instancias = [];
 
 $jsonPath = __DIR__ . "/scripts/instancias.json";
 
-require __DIR__ . '/scripts/config-webhooks.php';
-
 if (file_exists($jsonPath)) {
-    $instancias = json_decode(file_get_contents($jsonPath), true);
+    $todas = json_decode(file_get_contents($jsonPath), true);
+    $empresaUsuario = $_SESSION['empresa'] ?? '';
+
+    $instancias = array_filter($todas, function ($inst) use ($empresaUsuario) {
+        return isset($inst['empresa']) && $inst['empresa'] === $empresaUsuario;
+    });
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
