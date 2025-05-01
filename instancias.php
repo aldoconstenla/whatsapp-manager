@@ -46,6 +46,7 @@ if (file_exists($caminho)) {
         <form id="createForm" action="scripts/instanciador.php" method="POST">
             <label for="nome">Nome da Instância</label>
             <input type="text" name="nome" id="nome" required>
+            <input type="hidden" name="empresa" value="<?= htmlspecialchars($_SESSION['empresa']) ?>">
             <button type="submit">Criar Instância</button>
         </form>
         <div id="status" class="status-message"></div>
