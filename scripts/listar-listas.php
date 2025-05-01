@@ -1,12 +1,18 @@
 <?php
-$arquivos = glob(__DIR__ . '/listas_de_envio/lista-*.json');
-$listas = [];
+session_start();
 
-foreach ($arquivos as $arquivo) {
-  $nome = basename($arquivo);
-  $nome = preg_replace('/^lista-/', '', $nome);
-  $nome = preg_replace('/\.json$/', '', $nome);
-  $listas[] = $nome;
+$nomeEmpresa = $_SESSION['empresa'] ?? '';
+$dirEmpresa = __DIR__ . "/listas_de_envio/$nomeEmpresa";
+
+$listas = [];
+if (is_dir($dirEmpresa)) {
+  foreach (glob("$dirEmpresa/lista-*.json") as $arquivo) {
+    $basename = basename($arquivo);
+    if (preg_match('/lista-(.+)\.json$/', $basename, $m)) {
+      $listas[] = $m[1];
+    }
+  }
 }
 
+header('Content-Type: application/json');
 echo json_encode($listas);
