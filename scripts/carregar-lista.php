@@ -1,6 +1,9 @@
 <?php
 $nome = preg_replace('/[^a-zA-Z0-9_-]/', '_', $_GET['nome'] ?? '');
-$caminho = __DIR__ . "/listas_de_envio/lista-{$nome}.json";
+session_start();
+$empresa = $_SESSION['empresa'] ?? null;
+
+$caminho = __DIR__ . "/../listas_de_envio/{$empresa}/lista-{$nome}.json";
 
 if (!file_exists($caminho)) {
   http_response_code(404);
