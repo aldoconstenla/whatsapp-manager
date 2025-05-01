@@ -3,11 +3,20 @@
 require __DIR__ . '/scripts/auth.php';
 
 $instancias = [];
-$jsonPath = __DIR__ . "/scripts/instancias.json";
+$empresaUsuario = $_SESSION['empresa'] ?? null;
+$caminho = __DIR__ . "/scripts/instancias.json";
 
-if (file_exists($jsonPath)) {
-    $instancias = json_decode(file_get_contents($jsonPath), true);
+if (file_exists($caminho)) {
+  $todasInstancias = json_decode(file_get_contents($caminho), true);
+
+  // Filtra apenas as instâncias da empresa do usuário logado
+  foreach ($todasInstancias as $instancia) {
+    if (($instancia['empresa'] ?? '') === $empresaUsuario) {
+      $instancias[] = $instancia;
+    }
+  }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

@@ -15,6 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       password_verify($senha, $usuario['senha'])
     ) {
       $_SESSION['usuario'] = $usuario['login'];
+      $_SESSION['empresa'] = $usuario['empresa'] ?? null;
+
+      if (!$_SESSION['empresa']) {
+        $erro = 'Usuário sem empresa associada.';
+        break;
+      }
+
       header('Location: index.php');
       exit;
     }
