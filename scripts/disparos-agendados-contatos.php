@@ -1,6 +1,15 @@
 <?php
 $arquivo = __DIR__ . '/disparos_agendados/agendamentos-contatos.json';
 
+session_start();
+
+$empresa = $_SESSION['empresa'] ?? null;
+if (!$empresa) {
+  http_response_code(403);
+  echo json_encode(['erro' => 'Sessão inválida']);
+  exit;
+}
+
 // Garante que o diretório existe
 if (!is_dir(dirname($arquivo))) {
   mkdir(dirname($arquivo), 0777, true);
@@ -27,6 +36,8 @@ if ($metodo === 'POST') {
     exit;
   }
 
+  $novo['empresa'] = $empresa; // <-- adiciona a empresa logada
+
   $dados[] = $novo;
   file_put_contents($arquivo, json_encode($dados, JSON_PRETTY_PRINT));
   echo json_encode(['ok' => true]);
@@ -51,4 +62,6 @@ if ($metodo === 'DELETE') {
 
 // 📤 GET: retorna todos os agendamentos
 header('Content-Type: application/json');
-echo json_encode($dados);
+$dadosEmpresa = array_filter($dados, fn($d) => ($d['empresa'] ?? '') === $empresa);
+echo json_encode(array_values($dadosEmpresa));
+
